@@ -156,24 +156,23 @@ translation dictionary; the legal pages load it, the homepage does not.
 
 ### Read this before launch
 
-**This text is not legal advice.** It is standard boilerplate adapted to how
+**This text is not legal advice.** An attorney licensed in Puerto Rico should
+review it — local employment and payroll law differs meaningfully from the
+mainland, which matters more than usual for a practice that advises on exactly
+those subjects.
+
+**On the content:** It is standard boilerplate adapted to how
 this specific site behaves — the Calendly embed, the language preference stored
 in the browser, the absence of tracking cookies. An attorney should review it.
 
-Two things must still be settled:
+Jurisdiction and address are filled in:
 
-1. ~~**The entity name.**~~ Confirmed: **Wala Isla Glow LLC**. Both pages state
-   that Molina Strategic Advisory is a registered trade name (DBA) of that
-   entity.
-2. **Governing state.** `[STATE]` appears twice in the Terms, in the governing
-   law section. Replace it in `legal-content.js` under `terms.s11.p`, in both
-   languages.
-3. **Mailing address.** `[MAILING ADDRESS]` appears at the end of the Privacy
-   Policy. Privacy laws generally expect a physical contact address. Replace it
-   under `privacy.s11.addr`, in both languages.
-
-The placeholders are deliberately visible, so an unfilled one cannot slip past
-unnoticed on a live page.
+2. ~~**Governing state.**~~ The Terms are governed by the laws of the
+   **Commonwealth of Puerto Rico**. Note the wording: Puerto Rico is a
+   Commonwealth, not a state, so the clause does not say "State of", and the
+   Spanish version uses the official name, *Estado Libre Asociado de Puerto
+   Rico*.
+3. ~~**Mailing address.**~~ HC 74 Box 6105, Naranjito, PR 00719.
 
 Both pages carry a last-updated date (`legal.date`). Set it to the launch date,
 and change it whenever the text is revised.

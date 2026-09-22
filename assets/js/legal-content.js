@@ -4,8 +4,9 @@
    Only the legal pages load this file; the homepage does not need it.
 
    NOT LEGAL ADVICE. This is standard boilerplate adapted to how this
-   particular site works. Have an attorney review it before launch, and fill
-   in the two bracketed placeholders (governing state, mailing address).
+   particular site works. Have an attorney review it before launch. Note that
+   Puerto Rico is a Commonwealth, so the governing-law clause says Commonwealth
+   rather than State, and Estado Libre Asociado in Spanish.
    ========================================================================== */
 
 (function () {
@@ -61,7 +62,7 @@
       'terms.s10.p': 'We may update these terms as the business or the site changes. The date at the top of this page shows when it was last revised, and the current version applies to your use of the site.',
 
       'terms.s11.h': 'Governing law',
-      'terms.s11.p': 'These terms are governed by the laws of the State of [STATE], without regard to its conflict-of-law rules. Any dispute relating to this website will be brought in the courts located in [STATE].',
+      'terms.s11.p': 'These terms are governed by the laws of the Commonwealth of Puerto Rico, without regard to its conflict-of-law rules. Any dispute relating to this website will be brought in the courts located in the Commonwealth of Puerto Rico.',
 
       /* ---- Privacy Policy ---- */
       'privacy.title': 'Privacy Policy',
@@ -104,7 +105,7 @@
 
       'privacy.s11.h': 'Contact',
       'privacy.s11.p': 'For any privacy question or request, write to us at the address below.',
-      'privacy.s11.addr': 'Wala Isla Glow LLC, dba Molina Strategic Advisory — [MAILING ADDRESS]'
+      'privacy.s11.addr': 'Wala Isla Glow LLC, dba Molina Strategic Advisory — HC 74 Box 6105, Naranjito, PR 00719'
     },
 
     /* ---------------------------------------------------------------- ES */
@@ -156,7 +157,7 @@
       'terms.s10.p': 'Podemos actualizar estos términos conforme cambie el negocio o el sitio. La fecha al inicio de esta página indica la última revisión, y la versión vigente aplica a su uso del sitio.',
 
       'terms.s11.h': 'Ley aplicable',
-      'terms.s11.p': 'Estos términos se rigen por las leyes del Estado de [ESTADO], sin atender a sus normas sobre conflicto de leyes. Cualquier disputa relacionada con este sitio web se someterá a los tribunales ubicados en [ESTADO].',
+      'terms.s11.p': 'Estos términos se rigen por las leyes del Estado Libre Asociado de Puerto Rico, sin atender a sus normas sobre conflicto de leyes. Cualquier disputa relacionada con este sitio web se someterá a los tribunales ubicados en el Estado Libre Asociado de Puerto Rico.',
 
       'privacy.title': 'Política de Privacidad',
       'privacy.intro': 'Esta política explica qué información recopila este sitio web, por qué y qué hacemos con ella. En resumen: recopilamos solo lo que usted decide enviarnos, lo usamos para responderle y no lo vendemos.',
@@ -198,7 +199,7 @@
 
       'privacy.s11.h': 'Contacto',
       'privacy.s11.p': 'Para cualquier pregunta o solicitud sobre privacidad, escríbanos a la dirección indicada abajo.',
-      'privacy.s11.addr': 'Wala Isla Glow LLC, dba Molina Strategic Advisory — [DIRECCIÓN POSTAL]'
+      'privacy.s11.addr': 'Wala Isla Glow LLC, dba Molina Strategic Advisory — HC 74 Box 6105, Naranjito, PR 00719'
     }
   };
 
