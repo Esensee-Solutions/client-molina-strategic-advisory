@@ -50,10 +50,11 @@ To add a new piece of text, give the element in `index.html` a
    frame crops to 4:5 from the top, which keeps the head and torso in view.
    To swap it later, replace the file at the same path — portrait orientation,
    roughly 4:5, at least 800×1000, and no code change needed.
-3. **Contact details.** The footer currently shows a placeholder address,
-   `hello@molinastrategicadvisory.com`, and a generic LinkedIn link. Replace
-   both in `index.html`, and set `CONTACT_EMAIL` at the top of
-   `assets/js/main.js` to the same address.
+3. **Contact details — email still needed.** The LinkedIn link in the footer
+   points to Waleska's profile. The email address is still a placeholder,
+   `hello@molinastrategicadvisory.com`. Replace it in two places: the footer
+   link in `index.html`, and `CONTACT_EMAIL` at the top of `assets/js/main.js`
+   (the contact form sends there when no form endpoint is configured).
 4. **Contact form delivery.** See below.
 
 ## Contact form
