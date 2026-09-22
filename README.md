@@ -50,14 +50,10 @@ To add a new piece of text, give the element in `index.html` a
    frame crops to 4:5 from the top, which keeps the head and torso in view.
    To swap it later, replace the file at the same path — portrait orientation,
    roughly 4:5, at least 800×1000, and no code change needed.
-3. ~~**Contact details.**~~ Done. The footer links to Waleska's LinkedIn
-   profile, and the email address — `molinastrategicadvisory@gmail.com` —
-   appears in the footer and beneath the scheduler.
+3. ~~**Contact details.**~~ Done. Footer links to Waleska's LinkedIn profile;
+   the email address `waleska@molinastrategicadvisory.com` appears in the
+   footer and beneath the scheduler.
 
-   Worth revisiting later: a domain-based address (for example
-   `waleska@molinastrategicadvisory.com`) reads as more established than a
-   Gmail address on a boutique advisory site. It is a search-and-replace in
-   `index.html` whenever a domain is registered.
 4. **Calendly link.** The scheduler is wired but points at a placeholder
    account. See below.
 
@@ -97,9 +93,31 @@ someone else's details rather than booking for themselves.
 
 ## Hosting
 
-Static files, so anything works: Vercel, Netlify, Cloudflare Pages, GitHub
-Pages, or traditional hosting. Nothing needs to be compiled — upload the
-`msa-website` folder as-is.
+Static files — nothing to compile. Upload the `msa-website` folder as-is, or
+point a host at this directory in the repository.
+
+The domain is `molinastrategicadvisory.com`, and the page declares it in its
+canonical URL and Open Graph tags. If the site ends up on a different domain,
+update both in the `<head>` of `index.html`, or search engines will keep
+pointing at the wrong address.
+
+Recommended: **Vercel**, **Netlify** or **Cloudflare Pages**. All three are free
+for a site this size, serve over HTTPS automatically, and connect a custom
+domain through DNS records at the registrar. Traditional shared hosting works
+too — it is plain HTML.
+
+Whichever host, set it to serve `index.html` at the root.
+
+### Share previews
+
+`build-single-file.py` flattens everything into one portable `.html` file for
+emailing or opening without a server:
+
+```
+python3 build-single-file.py
+```
+
+The result is a snapshot, not the source — edit the real files and re-run it.
 
 ## Design notes
 
