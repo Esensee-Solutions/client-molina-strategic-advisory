@@ -55,22 +55,42 @@ To add a new piece of text, give the element in `index.html` a
    `hello@molinastrategicadvisory.com`. Replace it in two places: the footer
    link in `index.html`, and `CONTACT_EMAIL` at the top of `assets/js/main.js`
    (the contact form sends there when no form endpoint is configured).
-4. **Contact form delivery.** See below.
+4. **Calendly link.** The scheduler is wired but points at a placeholder
+   account. See below.
 
-## Contact form
+## Scheduling (Calendly)
 
-The form validates in the browser, then does one of two things:
+The contact section embeds a Calendly booking calendar instead of a form, so
+enquiries land straight on the calendar with nothing to chase.
 
-- **If `FORM_ENDPOINT` in `assets/js/main.js` is empty** (the current state) it
-  opens the visitor's email client with the inquiry pre-filled. This works
-  everywhere with zero setup, but it is a weaker experience on phones and some
-  visitors will abandon it.
-- **If `FORM_ENDPOINT` is set to a form service URL** (Formspree, Basin,
-  Netlify Forms, or your own handler) the form POSTs the submission as JSON and
-  shows a thank-you message in place.
+**To go live, change one line.** In `assets/js/main.js`:
 
-Setting up a real endpoint before launch is strongly recommended — the brief's
-stated goal is converting interest into consultations, and mailto loses leads.
+```js
+var CALENDLY_URL = 'https://calendly.com/placeholder-msa/consultation';
+```
+
+Replace it with the real scheduling link. Nothing else needs touching.
+
+While that URL still contains the word `placeholder`, the page deliberately
+does **not** load Calendly — it renders a styled stand-in panel instead. A fake
+Calendly URL would otherwise embed a "page not found" screen, which looks
+broken when showing the site to a client. Change the URL and the real widget
+loads automatically.
+
+The embed passes Calendly's theming parameters (`background_color`,
+`text_color`, `primary_color`) so the calendar matches the navy section rather
+than dropping a white card into it. On Calendly's free tier these parameters
+are ignored and the calendar renders in its default light theme — worth
+checking once the real account is connected.
+
+Three meeting types are listed in the stand-in panel (consultation, diagnostic
+inquiry, referral partner introduction). Those are placeholders for whatever
+Waleska actually sets up in Calendly — edit them under the `sched.m1`–`sched.m3`
+keys in `assets/js/content.js`.
+
+Beneath the scheduler there is a plain email link for visitors who would rather
+write than book — useful for referral partners, who are often passing along
+someone else's details rather than booking for themselves.
 
 ## Hosting
 

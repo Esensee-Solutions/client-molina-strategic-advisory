@@ -518,47 +518,55 @@ body.nav-open{overflow:hidden}
   content:"";position:absolute;left:0;top:.62em;width:12px;height:1px;background:var(--blue-500);
 }
 
-.contact-form{
-  display:grid;gap:18px;
+.scheduler{
   background:rgba(255,255,255,.05);
   border:1px solid rgba(255,255,255,.16);
   border-radius:var(--radius);
   padding:28px 24px;
 }
-.field{display:flex;flex-direction:column;gap:7px}
-.field label{
-  font-size:11.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#AFC1D8;
-}
-.field input,.field select,.field textarea{
-  width:100%;min-height:48px;padding:12px 14px;
-  font-family:var(--font-body);font-size:15px;color:#fff;
-  background:rgba(255,255,255,.07);
-  border:1px solid rgba(255,255,255,.2);
-  border-radius:var(--radius);
-  transition:border-color .2s var(--ease), background-color .2s var(--ease);
-}
-.field textarea{min-height:110px;resize:vertical}
-.field select{appearance:none;
-  background-image:linear-gradient(45deg,transparent 50%,#AFC1D8 50%),linear-gradient(135deg,#AFC1D8 50%,transparent 50%);
-  background-position:calc(100% - 19px) 21px, calc(100% - 13px) 21px;
-  background-size:6px 6px, 6px 6px;background-repeat:no-repeat;
-  padding-right:42px;
-}
-.field select option{color:var(--ink);background:#fff}
-.field input::placeholder,.field textarea::placeholder{color:#7F93AD}
-.field input:focus,.field select:focus,.field textarea:focus{
-  background:rgba(255,255,255,.12);border-color:var(--blue-500);
-}
-.field.has-error input,.field.has-error select,.field.has-error textarea{border-color:#E4808A}
-.field-error{font-size:12.5px;color:#F0A7AE;letter-spacing:0;text-transform:none;font-weight:400}
+.scheduler .sub-head{margin-bottom:18px}
 
-.form-actions{gap:14px}
-.form-actions .btn{justify-self:start}
-.form-note{font-size:13px;color:#9FB3CC;margin:0}
-.form-status{
-  margin:0;font-size:14px;color:#BFE0B8;
+.calendly-mount{min-height:420px}
+.calendly-mount-empty{
+  min-height:0;
+  border:1px dashed rgba(255,255,255,.26);
+  border-radius:var(--radius);
+  background:rgba(58,123,200,.07);
 }
-.form-status.is-error{color:#F0A7AE}
+
+.sched-stand-in{padding:34px 24px;text-align:center}
+.sched-icon{
+  display:grid;place-items:center;
+  width:52px;height:52px;margin:0 auto 18px;
+  border-radius:50%;
+  background:rgba(58,123,200,.18);
+  color:var(--blue-500);
+}
+.sched-icon svg{width:26px;height:26px}
+.sched-title{
+  font-family:var(--font-display);font-size:19px;color:#fff;margin:0 0 10px;
+}
+.sched-body{
+  font-size:14.5px;line-height:1.6;color:#AFC1D8;
+  max-width:44ch;margin:0 auto 22px;
+}
+.sched-list{
+  list-style:none;margin:0;padding:22px 0 0;
+  border-top:1px solid rgba(255,255,255,.14);
+  display:grid;gap:10px;
+}
+.sched-list li{
+  font-size:12.5px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;
+  color:#C7D4E6;
+}
+
+.scheduler-fallback{
+  margin:20px 0 0;padding-top:18px;
+  border-top:1px solid rgba(255,255,255,.12);
+  font-size:14px;color:#AFC1D8;
+}
+.scheduler-fallback a{color:#9FC1E6;text-decoration:underline;text-underline-offset:3px;word-break:break-word}
+.scheduler-fallback a:hover{color:#fff}
 
 /* ---------- Footer ---------- */
 
@@ -601,8 +609,7 @@ body.nav-open{overflow:hidden}
   .fit-grid{grid-template-columns:repeat(2,1fr)}
   .partner-row{grid-template-columns:repeat(2,1fr)}
   .two-col{grid-template-columns:repeat(2,1fr);gap:8px 28px}
-  .contact-form{grid-template-columns:repeat(2,1fr);padding:34px 30px}
-  .field-full{grid-column:1/-1}
+  .scheduler{padding:32px 28px}
   .deliv-list{grid-template-columns:repeat(2,1fr)}
 }
 
@@ -664,7 +671,7 @@ body.nav-open{overflow:hidden}
 }
 
 @media print{
-  .site-header,.nav-scrim,.btn-row,.contact-form{display:none}
+  .site-header,.nav-scrim,.btn-row,.scheduler{display:none}
   body{color:#000;background:#fff}
   .section-dark,.hero{background:#fff !important;color:#000}
   .section-dark h2,.section-dark h3,.section-dark h4,.hero h1{color:#000}

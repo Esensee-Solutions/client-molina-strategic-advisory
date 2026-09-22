@@ -7,11 +7,16 @@
 (function () {
   'use strict';
 
-  /* Set this to a form endpoint (Formspree, Basin, Netlify Forms, your own
-     handler) to receive submissions by POST. Left empty, the form falls back
-     to opening the visitor's email client with the message pre-filled. */
-  var FORM_ENDPOINT = '';
-  var CONTACT_EMAIL = 'hello@molinastrategicadvisory.com';
+  /* ---------------------------------------------------------------------
+     SCHEDULING — the one line to change before launch.
+
+     Replace this with the real Calendly link, e.g.
+       'https://calendly.com/waleska-msa/consultation'
+     While the URL still contains the word "placeholder", the page renders a
+     styled stand-in panel instead of embedding a booking page that does not
+     exist. Change the URL and the real Calendly widget loads automatically.
+     --------------------------------------------------------------------- */
+  var CALENDLY_URL = 'https://calendly.com/placeholder-msa/consultation';
 
   var STORAGE_KEY = 'msa-lang';
   var CONTENT = window.MSA_CONTENT || { en: {}, es: {} };
@@ -161,134 +166,78 @@
   var year = document.getElementById('year');
   if (year) year.textContent = String(new Date().getFullYear());
 
-  /* -------------------------------------------------------- Contact form */
+  /* ---------------------------------------------------------- Scheduling */
 
-  var form = document.getElementById('contactForm');
-  if (!form) return;
+  var mount = document.getElementById('calendlyMount');
+  if (!mount) return;
 
-  var status = document.getElementById('formStatus');
-
-  function clearError(field) {
-    field.classList.remove('has-error');
-    var msg = field.querySelector('.field-error');
-    if (msg) msg.remove();
-    var input = field.querySelector('input, select, textarea');
-    if (input) input.removeAttribute('aria-invalid');
+  /* Calendly's own theming parameters, so the embed matches the navy section
+     rather than dropping a white card into it. */
+  function themedUrl(url) {
+    var join = url.indexOf('?') === -1 ? '?' : '&';
+    return url + join + [
+      'hide_gdpr_banner=1',
+      'background_color=13243f',
+      'text_color=ffffff',
+      'primary_color=2c63a8'
+    ].join('&');
   }
 
-  function showError(input, message) {
-    var field = input.closest('.field');
-    if (!field) return;
-    clearError(field);
-    field.classList.add('has-error');
-    input.setAttribute('aria-invalid', 'true');
-    var msg = document.createElement('p');
-    msg.className = 'field-error';
-    msg.textContent = message;
-    field.appendChild(msg);
+  function renderPlaceholder() {
+    mount.classList.add('calendly-mount-empty');
+    mount.innerHTML =
+      '<div class="sched-stand-in">' +
+        '<span class="sched-icon" aria-hidden="true">' +
+          '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" ' +
+               'stroke-linecap="round" stroke-linejoin="round">' +
+            '<rect x="4" y="7" width="24" height="21" rx="2"/>' +
+            '<path d="M4 13h24M11 4v6M21 4v6"/>' +
+            '<path d="M10 19h4M18 19h4M10 24h4"/>' +
+          '</svg>' +
+        '</span>' +
+        '<h4 class="sched-title"></h4>' +
+        '<p class="sched-body"></p>' +
+        '<ul class="sched-list"><li></li><li></li><li></li></ul>' +
+      '</div>';
+    paintPlaceholder();
   }
 
-  form.querySelectorAll('input, select, textarea').forEach(function (input) {
-    input.addEventListener('input', function () {
-      var field = input.closest('.field');
-      if (field && field.classList.contains('has-error')) clearError(field);
+  /* Kept separate so the stand-in re-translates when the language changes. */
+  function paintPlaceholder() {
+    var box = mount.querySelector('.sched-stand-in');
+    if (!box) return;
+    box.querySelector('.sched-title').textContent = t('sched.title');
+    box.querySelector('.sched-body').textContent = t('sched.body');
+    var items = box.querySelectorAll('.sched-list li');
+    ['sched.m1', 'sched.m2', 'sched.m3'].forEach(function (key, i) {
+      if (items[i]) items[i].textContent = t(key);
     });
+  }
+
+  function renderCalendly() {
+    var widget = document.createElement('div');
+    widget.className = 'calendly-inline-widget';
+    widget.setAttribute('data-url', themedUrl(CALENDLY_URL));
+    widget.style.minWidth = '320px';
+    widget.style.height = '680px';
+    mount.appendChild(widget);
+
+    var script = document.createElement('script');
+    script.src = 'https://assets.calendly.com/assets/external/widget.js';
+    script.async = true;
+    script.onerror = renderPlaceholder;
+    document.body.appendChild(script);
+  }
+
+  if (/placeholder/i.test(CALENDLY_URL)) {
+    renderPlaceholder();
+  } else {
+    renderCalendly();
+  }
+
+  /* The stand-in is built in JS, so it needs repainting on a language switch. */
+  document.querySelectorAll('.lang-btn').forEach(function (btn) {
+    btn.addEventListener('click', paintPlaceholder);
   });
 
-  function validate() {
-    var firstInvalid = null;
-
-    form.querySelectorAll('[required]').forEach(function (input) {
-      var value = input.value.trim();
-      if (!value) {
-        showError(input, t('form.err.required'));
-        if (!firstInvalid) firstInvalid = input;
-      } else if (input.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value)) {
-        showError(input, t('form.err.email'));
-        if (!firstInvalid) firstInvalid = input;
-      }
-    });
-
-    return firstInvalid;
-  }
-
-  function labelFor(name) {
-    var input = form.elements[name];
-    if (!input) return name;
-    var field = input.closest('.field');
-    var label = field && field.querySelector('label');
-    return label ? label.textContent : name;
-  }
-
-  function readableValue(input) {
-    if (input.tagName === 'SELECT' && input.selectedIndex > -1) {
-      return input.options[input.selectedIndex].value ? input.options[input.selectedIndex].textContent : '';
-    }
-    return input.value.trim();
-  }
-
-  function collect() {
-    var data = {};
-    ['name', 'company', 'email', 'phone', 'employees', 'topic', 'message'].forEach(function (key) {
-      var input = form.elements[key];
-      if (input) data[key] = readableValue(input);
-    });
-    data.language = currentLang;
-    return data;
-  }
-
-  function mailtoFallback(data) {
-    var lines = ['name', 'company', 'email', 'phone', 'employees', 'topic'].map(function (key) {
-      return labelFor(key) + ': ' + (data[key] || '—');
-    });
-    if (data.message) lines.push('', data.message);
-
-    var subject = 'Website inquiry — ' + (data.company || data.name || 'MSA');
-    window.location.href =
-      'mailto:' + CONTACT_EMAIL +
-      '?subject=' + encodeURIComponent(subject) +
-      '&body=' + encodeURIComponent(lines.join('\n'));
-  }
-
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    status.textContent = '';
-    status.classList.remove('is-error');
-
-    var invalid = validate();
-    if (invalid) {
-      invalid.focus();
-      return;
-    }
-
-    var data = collect();
-    var submitBtn = form.querySelector('button[type="submit"]');
-
-    if (!FORM_ENDPOINT) {
-      status.textContent = t('form.mailto');
-      mailtoFallback(data);
-      return;
-    }
-
-    submitBtn.disabled = true;
-    status.textContent = t('form.sending');
-
-    fetch(FORM_ENDPOINT, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-      body: JSON.stringify(data)
-    })
-      .then(function (res) {
-        if (!res.ok) throw new Error('Request failed: ' + res.status);
-        form.reset();
-        status.textContent = t('form.sent');
-      })
-      .catch(function () {
-        status.classList.add('is-error');
-        status.textContent = t('form.failed');
-      })
-      .then(function () {
-        submitBtn.disabled = false;
-      });
-  });
 })();

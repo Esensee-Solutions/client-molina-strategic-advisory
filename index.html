@@ -332,58 +332,20 @@
       </ul>
     </div>
 
-    <form class="contact-form reveal" id="contactForm" novalidate>
-      <div class="field">
-        <label for="f-name" data-i18n="form.name">Name</label>
-        <input id="f-name" name="name" type="text" required autocomplete="name">
-      </div>
-      <div class="field">
-        <label for="f-company" data-i18n="form.company">Company</label>
-        <input id="f-company" name="company" type="text" autocomplete="organization">
-      </div>
-      <div class="field">
-        <label for="f-email" data-i18n="form.email">Email</label>
-        <input id="f-email" name="email" type="email" required autocomplete="email">
-      </div>
-      <div class="field">
-        <label for="f-phone" data-i18n="form.phone">Phone</label>
-        <input id="f-phone" name="phone" type="tel" autocomplete="tel">
-      </div>
-      <div class="field">
-        <label for="f-employees" data-i18n="form.employees">Number of Employees</label>
-        <select id="f-employees" name="employees">
-          <option value="" data-i18n="form.select">Select&hellip;</option>
-          <option value="1-10">1&ndash;10</option>
-          <option value="11-25">11&ndash;25</option>
-          <option value="26-50">26&ndash;50</option>
-          <option value="51-100">51&ndash;100</option>
-          <option value="100+">100+</option>
-        </select>
-      </div>
-      <div class="field">
-        <label for="f-topic" data-i18n="form.topic">What do you need help with?</label>
-        <select id="f-topic" name="topic">
-          <option value="" data-i18n="form.select">Select&hellip;</option>
-          <option value="hr"         data-i18n="form.t.hr">HR</option>
-          <option value="payroll"    data-i18n="form.t.payroll">Payroll / ADP</option>
-          <option value="recruiting" data-i18n="form.t.recruiting">Recruiting</option>
-          <option value="operations" data-i18n="form.t.operations">Operations</option>
-          <option value="sales"      data-i18n="form.t.sales">Sales Strategy</option>
-          <option value="diagnostic" data-i18n="form.t.diagnostic">Business Diagnostic</option>
-          <option value="referral"   data-i18n="form.t.referral">Referring a Client</option>
-          <option value="other"      data-i18n="form.t.other">Other</option>
-        </select>
-      </div>
-      <div class="field field-full">
-        <label for="f-message" data-i18n="form.message">Tell us a little more</label>
-        <textarea id="f-message" name="message" rows="4"></textarea>
-      </div>
-      <div class="field field-full form-actions">
-        <button class="btn btn-gold" type="submit" data-i18n="form.submit">Send Inquiry</button>
-        <p class="form-note" data-i18n="form.note">We respond to every inquiry personally, usually within one business day.</p>
-      </div>
-      <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
-    </form>
+    <div class="scheduler reveal">
+      <h3 class="sub-head" data-i18n="contact.schedule">Choose a time</h3>
+
+      <!-- Calendly inline embed.
+           TO GO LIVE: set CALENDLY_URL at the top of assets/js/main.js to the real
+           scheduling link. While that URL still contains "placeholder", the panel
+           below renders instead of loading a broken booking page. -->
+      <div id="calendlyMount" class="calendly-mount"></div>
+
+      <p class="scheduler-fallback">
+        <span data-i18n="contact.fallback">Prefer to write? Email us directly:</span>
+        <a href="mailto:hello@molinastrategicadvisory.com">hello@molinastrategicadvisory.com</a>
+      </p>
+    </div>
 
   </div>
 </section>
