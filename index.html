@@ -16,11 +16,14 @@
 <meta property="og:site_name" content="Molina Strategic Advisory">
 <meta property="og:locale" content="en_US">
 <meta property="og:locale:alternate" content="es_ES">
-<!-- og:image is intentionally absent until the real logo artwork lands and a
-     1200x630 share card can be produced from it. A missing image degrades to a
-     plain text link; a broken one shows an error card. -->
+<meta property="og:image" content="https://molinastrategicadvisory.com/assets/img/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Molina Strategic Advisory — People, Operations, Sales, Strategy">
+<meta name="twitter:card" content="summary_large_image">
 
-<link rel="icon" href="assets/img/logo-mark.svg" type="image/svg+xml">
+<link rel="icon" href="assets/img/logo-mark.png" type="image/png">
+<link rel="apple-touch-icon" href="assets/img/logo-mark.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,16 +38,9 @@
 <header class="site-header" id="siteHeader">
   <div class="shell header-inner">
 
-    <a class="brand" href="#home" aria-label="Molina Strategic Advisory — home">
-      <span class="brand-mark" aria-hidden="true">
-        <!-- Drop the real monogram in assets/img/logo-mark.png (or .svg) and it replaces the stand-in below. -->
-        <img class="brand-mark-img" src="assets/img/logo-mark.svg" alt=""
-             onerror="this.closest('.brand-mark').classList.add('mark-missing'); this.remove();">
-      </span>
-      <span class="brand-word">
-        <span class="brand-name">MOLINA</span>
-        <span class="brand-sub">STRATEGIC ADVISORY</span>
-      </span>
+    <a class="brand" href="#home">
+      <img class="brand-logo" src="assets/img/logo.png" width="520" height="154"
+           alt="Molina Strategic Advisory">
     </a>
 
     <nav class="site-nav" id="siteNav" aria-label="Main">

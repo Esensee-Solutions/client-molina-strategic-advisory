@@ -174,20 +174,13 @@ p:last-child{margin-bottom:0}
   min-height:72px;
 }
 
-.brand{display:flex;align-items:center;gap:12px;color:inherit;flex:0 0 auto}
+.brand{display:flex;align-items:center;color:inherit;flex:0 0 auto}
 .brand:hover{color:inherit}
-.brand-mark{flex:0 0 auto;width:42px;height:42px;display:block}
-.brand-mark img{width:100%;height:100%}
-/* fallback if the logo file is absent */
-.brand-mark.mark-missing{
-  border-radius:50%;
-  background:radial-gradient(circle at 30% 24%, var(--blue-500), var(--navy-800) 62%, var(--navy-900));
-  box-shadow:inset 0 0 0 2px #fff, inset 0 0 0 4px var(--navy-900);
-}
-.brand-mark.mark-missing::after{
-  content:"M";display:grid;place-items:center;height:100%;
-  font-family:var(--font-mark);font-size:20px;color:#fff;
-}
+
+/* Header carries the official lockup. The footer sits on navy, where the
+   navy-and-grey artwork would be illegible, so it keeps the type treatment
+   below in white. */
+.brand-logo{display:block;height:34px;width:auto}
 
 .brand-word{display:flex;flex-direction:column;line-height:1}
 .brand-name{
@@ -650,9 +643,7 @@ body.nav-open{overflow:hidden}
   .card-grid.cols-3{grid-template-columns:repeat(3,1fr)}
   .fit-grid{grid-template-columns:repeat(2,1fr);gap:16px 26px}
   .deliv-list{grid-template-columns:repeat(5,1fr)}
-  .brand-mark{width:48px;height:48px}
-  .brand-name{font-size:21px}
-  .brand-sub{font-size:9px}
+  .brand-logo{height:48px}
 }
 
 @media (min-width:1200px){

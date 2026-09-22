@@ -41,10 +41,8 @@ To add a new piece of text, give the element in `index.html` a
 
 ## Before launch — the open items
 
-1. **Logo.** Replace `assets/img/logo-mark.svg` with the official monogram
-   (`.svg` preferred, `.png` fine). Keep the filename, or update the `src` in
-   the header of `index.html`. The current file is an approximation I built
-   from the logo image — it is not the real artwork.
+1. ~~**Logo.**~~ Done. The official artwork is in place — see *Brand assets*
+   below.
 2. ~~**Founder photograph.**~~ Done. `assets/img/waleska.jpg` is the supplied
    portrait, resized to 900×1200 and saved at JPEG quality 86 (94 KB). The
    frame crops to 4:5 from the top, which keeps the head and torso in view.
@@ -55,7 +53,7 @@ To add a new piece of text, give the element in `index.html` a
    footer and beneath the scheduler.
 
 4. **Calendly link.** The scheduler is wired but points at a placeholder
-   account. See below.
+   account — the last thing outstanding. See *Scheduling* below.
 
 ## Scheduling (Calendly)
 
@@ -118,6 +116,27 @@ python3 build-single-file.py
 ```
 
 The result is a snapshot, not the source — edit the real files and re-run it.
+
+## Brand assets
+
+All three were derived from the supplied logo artwork (a 1536×1024 JPEG on a
+white background). The white background was removed by flood-filling inward
+from the edges, so the white letterform and ring *inside* the monogram stayed
+intact — a plain "make white transparent" pass would have punched holes in them.
+
+| File | Size | Used for |
+|---|---|---|
+| `logo.png` | 520×154 | The full lockup in the header |
+| `logo-mark.png` | 256×256 | Favicon and Apple touch icon |
+| `og-image.jpg` | 1200×630 | Link previews on LinkedIn, WhatsApp, email |
+
+**The footer does not use the lockup.** The artwork is navy and grey, which is
+illegible against the dark footer. The footer keeps a type-only treatment in
+white instead. If a white/knockout version of the logo ever exists, it belongs
+there — swap it into the `.footer-brand` block in `index.html`.
+
+The share card was built from the lockup at render time. If the logo changes,
+regenerate it rather than editing the JPEG.
 
 ## Design notes
 
