@@ -160,13 +160,11 @@ translation dictionary; the legal pages load it, the homepage does not.
 this specific site behaves — the Calendly embed, the language preference stored
 in the browser, the absence of tracking cookies. An attorney should review it.
 
-Three things must be settled first:
+Two things must still be settled:
 
-1. **The entity name.** Both pages state that Molina Strategic Advisory is a DBA
-   of **Wala Island Glow LLC**. Confirm that against the registration — this
-   repository is named `walaislaglow` and the sibling Shopify theme reads as
-   "Wala Isla Glow", without the "nd". Whichever is correct, the pages must
-   match the filing exactly.
+1. ~~**The entity name.**~~ Confirmed: **Wala Isla Glow LLC**. Both pages state
+   that Molina Strategic Advisory is a registered trade name (DBA) of that
+   entity.
 2. **Governing state.** `[STATE]` appears twice in the Terms, in the governing
    law section. Replace it in `legal-content.js` under `terms.s11.p`, in both
    languages.

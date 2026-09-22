@@ -21,7 +21,7 @@
       'legal.back': 'Back to the main site',
       'legal.updated': 'Last updated',
       'legal.date': '22 September 2026',
-      'legal.entity': 'Molina Strategic Advisory is a registered trade name (DBA) of Wala Island Glow LLC. In these pages, “MSA”, “we”, “us” and “our” refer to Wala Island Glow LLC doing business as Molina Strategic Advisory.',
+      'legal.entity': 'Molina Strategic Advisory is a registered trade name (DBA) of Wala Isla Glow LLC. In these pages, “MSA”, “we”, “us” and “our” refer to Wala Isla Glow LLC doing business as Molina Strategic Advisory.',
       'legal.questions': 'Questions about this page can be sent to',
 
       /* ---- Terms of Use ---- */
@@ -29,7 +29,7 @@
       'terms.intro': 'These terms govern your use of this website. By browsing the site, booking a meeting or contacting us through it, you agree to them. If you do not agree, please do not use the site.',
 
       'terms.s1.h': 'Who we are',
-      'terms.s1.p': 'This website is operated by Wala Island Glow LLC, trading as Molina Strategic Advisory. MSA is a business, HR and operations consulting practice.',
+      'terms.s1.p': 'This website is operated by Wala Isla Glow LLC, trading as Molina Strategic Advisory. MSA is a business, HR and operations consulting practice.',
 
       'terms.s2.h': 'What this website is',
       'terms.s2.p1': 'This site describes the services MSA offers. Everything on it is general information about our practice. It is not advice, a recommendation or a proposal directed at any particular business.',
@@ -104,7 +104,7 @@
 
       'privacy.s11.h': 'Contact',
       'privacy.s11.p': 'For any privacy question or request, write to us at the address below.',
-      'privacy.s11.addr': 'Wala Island Glow LLC, dba Molina Strategic Advisory — [MAILING ADDRESS]'
+      'privacy.s11.addr': 'Wala Isla Glow LLC, dba Molina Strategic Advisory — [MAILING ADDRESS]'
     },
 
     /* ---------------------------------------------------------------- ES */
@@ -117,14 +117,14 @@
       'legal.back': 'Volver al sitio principal',
       'legal.updated': 'Última actualización',
       'legal.date': '22 de septiembre de 2026',
-      'legal.entity': 'Molina Strategic Advisory es un nombre comercial registrado (DBA) de Wala Island Glow LLC. En estas páginas, «MSA», «nosotros» y «nuestro» se refieren a Wala Island Glow LLC operando como Molina Strategic Advisory.',
+      'legal.entity': 'Molina Strategic Advisory es un nombre comercial registrado (DBA) de Wala Isla Glow LLC. En estas páginas, «MSA», «nosotros» y «nuestro» se refieren a Wala Isla Glow LLC operando como Molina Strategic Advisory.',
       'legal.questions': 'Las preguntas sobre esta página pueden enviarse a',
 
       'terms.title': 'Términos de Uso',
       'terms.intro': 'Estos términos rigen el uso de este sitio web. Al navegar por el sitio, agendar una cita o contactarnos a través de él, usted los acepta. Si no está de acuerdo, le pedimos que no utilice el sitio.',
 
       'terms.s1.h': 'Quiénes somos',
-      'terms.s1.p': 'Este sitio web es operado por Wala Island Glow LLC, bajo el nombre comercial Molina Strategic Advisory. MSA es una práctica de consultoría en negocios, recursos humanos y operaciones.',
+      'terms.s1.p': 'Este sitio web es operado por Wala Isla Glow LLC, bajo el nombre comercial Molina Strategic Advisory. MSA es una práctica de consultoría en negocios, recursos humanos y operaciones.',
 
       'terms.s2.h': 'Qué es este sitio web',
       'terms.s2.p1': 'Este sitio describe los servicios que ofrece MSA. Todo su contenido es información general sobre nuestra práctica. No constituye asesoría, recomendación ni propuesta dirigida a ninguna empresa en particular.',
@@ -198,7 +198,7 @@
 
       'privacy.s11.h': 'Contacto',
       'privacy.s11.p': 'Para cualquier pregunta o solicitud sobre privacidad, escríbanos a la dirección indicada abajo.',
-      'privacy.s11.addr': 'Wala Island Glow LLC, dba Molina Strategic Advisory — [DIRECCIÓN POSTAL]'
+      'privacy.s11.addr': 'Wala Isla Glow LLC, dba Molina Strategic Advisory — [DIRECCIÓN POSTAL]'
     }
   };
 
