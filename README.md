@@ -19,7 +19,7 @@ msa-website/
 │   ├── js/main.js          Language switch, navigation, scroll behavior, contact form.
 │   └── img/
 │       ├── logo-mark.svg   Stand-in monogram — replace with the official artwork.
-│       └── waleska.jpg     (not yet added) Founder photograph.
+│       └── waleska.jpg     Founder photograph — low-res placeholder, see below.
 └── README.md
 ```
 
@@ -45,9 +45,17 @@ To add a new piece of text, give the element in `index.html` a
    (`.svg` preferred, `.png` fine). Keep the filename, or update the `src` in
    the header of `index.html`. The current file is an approximation I built
    from the logo image — it is not the real artwork.
-2. **Founder photograph.** Drop a portrait at `assets/img/waleska.jpg`
-   (portrait orientation, roughly 4:5, at least 800×1000). It replaces the
-   navy placeholder block automatically — no code change needed.
+2. **Founder photograph — higher resolution needed.** The file currently at
+   `assets/img/waleska.jpg` is a 200×200 thumbnail (8.7 KB), almost certainly
+   a copy compressed by a messaging app. It is in place and renders, but it is
+   being upscaled and looks soft, and being square it leaves no room to crop
+   toward her face.
+
+   Replace it with the original: portrait orientation, roughly 4:5, at least
+   800×1000. Keep the same filename. Then in `assets/css/styles.css` find the
+   `.portrait` rule, set `aspect-ratio` back to `4/5` and delete the
+   `max-width` line — that restores the full-height portrait the layout was
+   designed around.
 3. **Contact details.** The footer currently shows a placeholder address,
    `hello@molinastrategicadvisory.com`, and a generic LinkedIn link. Replace
    both in `index.html`, and set `CONTACT_EMAIL` at the top of
