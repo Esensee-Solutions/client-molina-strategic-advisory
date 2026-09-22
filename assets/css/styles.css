@@ -588,6 +588,72 @@ body.nav-open{overflow:hidden}
 .disclaimer{font-size:12.5px;line-height:1.6;color:#7E92AD;margin:0;max-width:80ch}
 .copyright{font-size:12.5px;color:#7E92AD;margin:0}
 
+/* ---------- Legal pages (terms, privacy) ---------- */
+
+.legal{background:var(--white);padding-block:clamp(40px, 7vw, 76px) var(--section-y)}
+.legal-shell{max-width:780px}
+
+.legal-back{margin:0 0 34px}
+.legal-back a{
+  font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--grey-600);
+}
+.legal-back a::before{content:"\2190";margin-right:9px}
+.legal-back a:hover{color:var(--blue-600)}
+
+.legal-head{
+  padding-bottom:32px;margin-bottom:8px;
+  border-bottom:1px solid var(--grey-200);
+}
+.legal-head h1{margin-bottom:.35em}
+.legal-meta{
+  font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--grey-600);margin-bottom:1.6em;
+}
+.legal-entity{
+  margin-top:1.4em;padding:16px 18px;
+  background:var(--grey-100);
+  border-left:2px solid var(--blue-600);
+  font-size:14.5px;line-height:1.6;color:var(--grey-700);
+}
+
+.legal-section{padding-top:36px}
+.legal-section h2{
+  font-family:var(--font-display);font-weight:600;
+  font-size:clamp(19px, 2.2vw, 23px);line-height:1.25;
+  color:var(--navy-900);margin:0 0 .6em;
+}
+.legal-section p{color:var(--grey-700);font-size:15.5px;line-height:1.7}
+
+.legal-list{margin:0 0 1.1em;padding:0;list-style:none}
+.legal-list li{
+  position:relative;padding-left:22px;margin-bottom:10px;
+  font-size:15.5px;line-height:1.65;color:var(--grey-700);
+}
+.legal-list li::before{
+  content:"";position:absolute;left:0;top:.62em;
+  width:7px;height:7px;border-radius:50%;border:1.5px solid var(--blue-500);
+}
+
+.legal-address{
+  margin-top:1.2em;padding:16px 18px;
+  background:var(--grey-100);border-radius:var(--radius);
+  font-size:14.5px;color:var(--grey-700);
+}
+
+.legal-contact{
+  margin-top:48px;padding-top:26px;
+  border-top:1px solid var(--grey-200);
+  font-size:15px;color:var(--grey-700);
+}
+.legal-contact a{word-break:break-word}
+
+/* DBA disclosure strip under the footer */
+.footer-dba{padding-top:16px}
+.footer-dba p{
+  margin:0;font-size:12px;line-height:1.6;color:#6B7F99;
+}
+
 /* ---------- Reveal on scroll ---------- */
 
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s var(--ease), transform .6s var(--ease)}

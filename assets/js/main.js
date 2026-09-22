@@ -50,11 +50,15 @@
       if (value) el.innerHTML = value;
     });
 
-    var title = t('meta.title');
+    /* Each page names its own meta keys, so a subpage does not inherit the
+       homepage title when the language is switched. */
+    var prefix = document.body.getAttribute('data-meta-prefix') || 'meta';
+
+    var title = t(prefix + '.title');
     if (title) document.title = title;
 
     var desc = document.querySelector('meta[name="description"]');
-    if (desc && t('meta.desc')) desc.setAttribute('content', t('meta.desc'));
+    if (desc && t(prefix + '.desc')) desc.setAttribute('content', t(prefix + '.desc'));
 
     document.querySelectorAll('.lang-btn').forEach(function (btn) {
       var active = btn.getAttribute('data-lang') === lang;

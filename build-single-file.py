@@ -1,8 +1,12 @@
 #!/usr/bin/env python3
 """
-Flatten the site into one self-contained .html file for previewing or emailing.
+Flatten a page into one self-contained .html file for previewing or emailing.
 
-    python3 build-single-file.py [output.html]
+    python3 build-single-file.py [source.html] [output.html]
+
+Defaults to index.html. Note that a flattened page is standalone: links to the
+other pages (Terms, Privacy) will not resolve from it, because those files are
+not alongside it.
 
 CSS, JavaScript, the logo and the photograph are all embedded, so the result
 opens from a hard drive with no server and no folder alongside it. Google Fonts
@@ -33,28 +37,32 @@ def data_uri(relpath):
 
 
 def main():
-    out_path = sys.argv[1] if len(sys.argv) > 1 else DEFAULT_OUT
+    args = list(sys.argv[1:])
 
-    html = read("index.html")
-    css = read("assets", "css", "styles.css")
-    content = read("assets", "js", "content.js")
-    main_js = read("assets", "js", "main.js")
+    # A bare filename that exists in this folder is the page to flatten;
+    # anything else is where to write the result.
+    source = "index.html"
+    if args and not os.path.isabs(args[0]) and os.path.exists(os.path.join(HERE, args[0])):
+        source = args.pop(0)
+    out_path = args[0] if args else DEFAULT_OUT
 
-    # A literal </script> inside embedded JS would end the tag early.
-    for name, body in (("styles.css", css), ("content.js", content), ("main.js", main_js)):
+    html = read(source)
+
+    # Inline every stylesheet and script the page actually references, in place,
+    # so page-specific bundles (the legal pages load an extra one) are picked up.
+    for href in re.findall(r'<link rel="stylesheet" href="(assets/[^"]+)">', html):
+        html = html.replace(
+            '<link rel="stylesheet" href="%s">' % href,
+            "<style>\n%s\n</style>" % read(*href.split("/")),
+        )
+
+    for src in re.findall(r'<script src="(assets/[^"]+)"></script>', html):
+        body = read(*src.split("/"))
         if "</script" in body.lower():
-            sys.exit("error: %s contains a literal </script> and cannot be inlined" % name)
-
-    html = html.replace(
-        '<link rel="stylesheet" href="assets/css/styles.css">',
-        "<style>\n%s\n</style>" % css,
-    )
-    html = html.replace(
-        '<script src="assets/js/content.js"></script>', "<script>\n%s\n</script>" % content
-    )
-    html = html.replace(
-        '<script src="assets/js/main.js"></script>', "<script>\n%s\n</script>" % main_js
-    )
+            sys.exit("error: %s contains a literal </script> and cannot be inlined" % src)
+        html = html.replace(
+            '<script src="%s"></script>' % src, "<script>\n%s\n</script>" % body
+        )
 
     # Every remaining local asset, whether referenced by src= or href=.
     for attr, path in set(re.findall(r'(src|href)="(assets/img/[^"]+)"', html)):
@@ -67,7 +75,7 @@ def main():
     with open(out_path, "w", encoding="utf-8") as fh:
         fh.write(html)
 
-    print("wrote %s (%.0f KB)" % (out_path, os.path.getsize(out_path) / 1024))
+    print("wrote %s from %s (%.0f KB)" % (out_path, source, os.path.getsize(out_path) / 1024))
 
 
 if __name__ == "__main__":

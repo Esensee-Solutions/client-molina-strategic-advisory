@@ -161,6 +161,9 @@ window.MSA_CONTENT = {
     'sched.m3': 'Referral Partner Introduction · 20 minutes',
 
     'footer.disclaimer': 'Molina Strategic Advisory provides business, HR and operational consulting services. MSA does not provide legal or tax advice and may collaborate with the client’s legal, accounting and other professional advisors when appropriate.',
+    'nav.terms': 'Terms of Use',
+    'nav.privacy': 'Privacy Policy',
+    'footer.dba': 'Molina Strategic Advisory is a registered trade name (DBA) of Wala Island Glow LLC.',
     'footer.rights': 'All rights reserved.'
   },
 
@@ -319,6 +322,9 @@ window.MSA_CONTENT = {
     'sched.m3': 'Presentación para Socios de Referido · 20 minutos',
 
     'footer.disclaimer': 'Molina Strategic Advisory brinda servicios de consultoría en negocios, recursos humanos y operaciones. MSA no brinda asesoría legal ni fiscal, y puede colaborar con los asesores legales, contables y demás profesionales del cliente cuando sea apropiado.',
+    'nav.terms': 'Términos de Uso',
+    'nav.privacy': 'Política de Privacidad',
+    'footer.dba': 'Molina Strategic Advisory es un nombre comercial registrado (DBA) de Wala Island Glow LLC.',
     'footer.rights': 'Todos los derechos reservados.'
   }
 };

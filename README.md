@@ -12,10 +12,13 @@ Bilingual (English / Spanish) with a toggle in the header.
 
 ```
 msa-website/
-├── index.html              Page structure. Text is referenced by key, not written inline.
+├── index.html              The one-page site. Text is referenced by key, not written inline.
+├── terms.html              Terms of Use.
+├── privacy.html            Privacy Policy.
 ├── assets/
 │   ├── css/styles.css      Design system + all layout.
 │   ├── js/content.js       ← ALL SITE COPY LIVES HERE (English + Spanish).
+│   ├── js/legal-content.js Terms and Privacy copy (English + Spanish).
 │   ├── js/main.js          Language switch, navigation, scroll behavior, contact form.
 │   └── img/
 │       ├── logo-mark.svg   Stand-in monogram — replace with the official artwork.
@@ -112,10 +115,13 @@ Whichever host, set it to serve `index.html` at the root.
 emailing or opening without a server:
 
 ```
-python3 build-single-file.py
+python3 build-single-file.py                 # the homepage
+python3 build-single-file.py privacy.html    # any other page
 ```
 
 The result is a snapshot, not the source — edit the real files and re-run it.
+A flattened page is standalone, so its links to the other pages will not
+resolve.
 
 ## Brand assets
 
@@ -137,6 +143,46 @@ there — swap it into the `.footer-brand` block in `index.html`.
 
 The share card was built from the lockup at render time. If the logo changes,
 regenerate it rather than editing the JPEG.
+
+## Legal pages
+
+`terms.html` and `privacy.html` are the one exception to the single-page rule.
+They are separate files because legal pages need their own URLs — linkable from
+the footer, from Calendly, and from an email signature.
+
+They share the design system, the header and footer, and the language toggle.
+Their copy lives in `assets/js/legal-content.js`, which merges into the same
+translation dictionary; the legal pages load it, the homepage does not.
+
+### Read this before launch
+
+**This text is not legal advice.** It is standard boilerplate adapted to how
+this specific site behaves — the Calendly embed, the language preference stored
+in the browser, the absence of tracking cookies. An attorney should review it.
+
+Three things must be settled first:
+
+1. **The entity name.** Both pages state that Molina Strategic Advisory is a DBA
+   of **Wala Island Glow LLC**. Confirm that against the registration — this
+   repository is named `walaislaglow` and the sibling Shopify theme reads as
+   "Wala Isla Glow", without the "nd". Whichever is correct, the pages must
+   match the filing exactly.
+2. **Governing state.** `[STATE]` appears twice in the Terms, in the governing
+   law section. Replace it in `legal-content.js` under `terms.s11.p`, in both
+   languages.
+3. **Mailing address.** `[MAILING ADDRESS]` appears at the end of the Privacy
+   Policy. Privacy laws generally expect a physical contact address. Replace it
+   under `privacy.s11.addr`, in both languages.
+
+The placeholders are deliberately visible, so an unfilled one cannot slip past
+unnoticed on a live page.
+
+Both pages carry a last-updated date (`legal.date`). Set it to the launch date,
+and change it whenever the text is revised.
+
+If analytics are ever added to the site, the Privacy Policy's cookies section
+becomes inaccurate and must be updated — it currently states that the site sets
+no tracking cookies, which is true today.
 
 ## Design notes
 
