@@ -33,6 +33,8 @@ client-molina-strategic-advisory/
 ├── check.py                  Checks the copy against CLAUDE.md's rules. Run before every pull request.
 ├── build-single-file.py      Flattens a built page into one file for emailing.
 ├── astro.config.mjs          Domain and languages.
+├── wrangler.jsonc            The Cloudflare Worker that serves dist/.
+├── .github/workflows/site.yml  Checks, builds, previews and deploys.
 ├── src/
 │   ├── content/site.ts       ← ALL SITE COPY LIVES HERE (English + Spanish).
 │   ├── content/legal.ts      Terms and Privacy copy (English + Spanish).
@@ -147,8 +149,35 @@ canonical URL and Open Graph tags. If the site ends up on a different domain,
 change `site` in `astro.config.mjs`, or search engines will keep
 pointing at the wrong address.
 
-The site is on Astro but not on Esensee's Site kit or Cloudflare Workers
-deploy yet. Until then any static host works: build, then serve `dist/`.
+### Cloudflare Workers
+
+The site is served by a Cloudflare Worker named `molina-strategic-advisory`
+(`wrangler.jsonc`). There is no Worker code: Cloudflare serves the files in
+`dist/` as they are and reads `_redirects` from it.
+
+GitHub Actions does the building (`.github/workflows/site.yml`):
+
+- **Every pull request:** `npm run check`, `npm run build`, then a preview
+  version is uploaded and its link posted as a comment on the pull request
+  (`https://pr-<number>-molina-strategic-advisory.<account>.workers.dev`).
+- **Every merge into `main`:** the same checks, then `wrangler deploy` puts it
+  live.
+
+It needs two secrets from the `esensee-solutions` organization, shared with
+this repository: `CLOUDFLARE_API_TOKEN` (a token with *Workers Scripts: Edit*)
+and `CLOUDFLARE_ACCOUNT_ID`. Without them the checks and build still run and
+the upload steps are skipped.
+
+To see the Workers version on your machine: `npm run build`, then
+`npx wrangler dev` (http://localhost:8787).
+
+Going back to an earlier version: `npx wrangler rollback`, or
+**Workers & Pages → molina-strategic-advisory → Deployments** in Cloudflare.
+
+**Not connected yet:** the domain. Once `molinastrategicadvisory.com` is on
+Esensee's Cloudflare account (copy every MX and TXT record first, or email
+stops), uncomment the `routes` line in `wrangler.jsonc` and forward `www` to
+the bare domain. Until then the site is at its `workers.dev` address.
 
 
 ### Share previews

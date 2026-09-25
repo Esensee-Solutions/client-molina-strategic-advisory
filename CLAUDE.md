@@ -29,7 +29,8 @@ Use these in code, commits and pull requests.
 - English is at `/`, Spanish at `/es/`. The pages are home, `terms/` and `privacy/` in each.
 - The Calendly link, email and LinkedIn are in `src/settings.ts`.
 - `python3 build-single-file.py` makes a one-file preview to email from `dist/`. It's a snapshot, never the source.
-- It isn't on the Site kit or Esensee's Cloudflare Workers deploy yet. When the Site kit exists, its SEO tags, language switch and deploy replace this site's own; the look stays. Don't start that unless asked.
+- Cloudflare Workers serves `dist/` (`wrangler.jsonc`). GitHub Actions checks and builds every pull request, posts a preview link, and deploys `main` (`.github/workflows/site.yml`). The domain isn't connected yet.
+- It isn't on the Site kit yet. When the Site kit exists, its SEO tags, language switch and deploy replace this site's own; the look stays. Don't start that unless asked.
 
 ## Rules
 
@@ -43,6 +44,6 @@ Use these in code, commits and pull requests.
 
 ## Working
 
-- Work on a branch and open a pull request into `main`.
+- Work on a branch and open a pull request into `main`. Merging into `main` puts the site live.
 - Run `npm run check` and `npm run build` before every pull request. It checks both languages have the same keys, the
   disclaimer, and the never-say list. Then check the change in a browser at phone width, in both languages.

@@ -1,0 +1,59 @@
+# Checks and builds every pull request, and puts it on a preview link.
+# Merging into main puts the site live on Cloudflare Workers (Esensee ADR 0003).
+#
+# Needs two secrets from the esensee-solutions organization, shared with this
+# repository: CLOUDFLARE_API_TOKEN (permission: Workers Scripts, Edit) and
+# CLOUDFLARE_ACCOUNT_ID. Until they're there, the checks and build still run
+# and the upload steps are skipped.
+name: Site
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  pull-requests: write # the preview-link comment
+
+concurrency:
+  group: site-${{ github.ref }}
+  # Never stop a live deploy halfway; a newer preview replaces an older one.
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  site:
+    runs-on: ubuntu-latest
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+
+      - name: Upload a preview
+        id: preview
+        if: github.event_name == 'pull_request' && env.CLOUDFLARE_API_TOKEN != ''
+        run: |
+          npx wrangler versions upload --preview-alias "pr-${{ github.event.number }}" \
+            --message "PR #${{ github.event.number }} @ ${GITHUB_SHA::7}" | tee upload.log
+          url=$(grep -oE 'https://pr-[^ ]+\.workers\.dev' upload.log | head -1)
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+
+      - name: Comment the preview link
+        if: steps.preview.outputs.url != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          URL: ${{ steps.preview.outputs.url }}
+        run: |
+          gh pr comment ${{ github.event.number }} --edit-last --create-if-none \
+            --body "Preview of this pull request: $URL (Spanish: $URL/es/). Updates on every push."
+
+      - name: Put the site live
+        if: github.event_name == 'push' && env.CLOUDFLARE_API_TOKEN != ''
+        run: npx wrangler deploy --message "main @ ${GITHUB_SHA::7}"
