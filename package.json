@@ -1,0 +1,14 @@
+{
+  "name": "client-molina-strategic-advisory",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "python3 check.py"
+  },
+  "dependencies": {
+    "astro": "^7.3.5"
+  }
+}

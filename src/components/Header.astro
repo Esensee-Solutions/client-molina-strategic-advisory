@@ -1,0 +1,45 @@
+---
+import { localePath, useT, type Lang } from '../i18n';
+
+interface Props { lang: Lang; page: string }
+const { lang, page } = Astro.props;
+const t = useT(lang);
+const isHome = page === '';
+/* On the homepage the links scroll; elsewhere they go back to it. */
+const home = isHome ? '' : localePath(lang);
+const sections = ['home', 'services', 'diagnostic', 'about', 'referrals', 'contact'];
+---
+<header class="site-header" id="siteHeader">
+  <div class="shell header-inner">
+
+    <a class="brand" href={isHome ? '#home' : localePath(lang)}>
+      <img class="brand-logo" src="/assets/img/logo.png" width="520" height="154"
+           alt="Molina Strategic Advisory">
+    </a>
+
+    <nav class="site-nav" id="siteNav" aria-label="Main">
+      <ul>
+        {sections.map((id) => <li><a href={`${home}#${id}`}>{t(`nav.${id}`)}</a></li>)}
+      </ul>
+      <div class="nav-foot">
+        <a class="btn btn-gold btn-sm" href={`${home}#contact`}>{t('cta.consult')}</a>
+      </div>
+    </nav>
+
+    <div class="header-end">
+      <div class="lang-switch" role="group" aria-label="Language">
+        <a class:list={['lang-btn', { 'is-active': lang === 'en' }]} href={localePath('en', page)}
+           hreflang="en" lang="en" aria-current={lang === 'en' ? 'page' : undefined}>EN</a>
+        <span class="lang-sep" aria-hidden="true">/</span>
+        <a class:list={['lang-btn', { 'is-active': lang === 'es' }]} href={localePath('es', page)}
+           hreflang="es" lang="es" aria-current={lang === 'es' ? 'page' : undefined}>ES</a>
+      </div>
+      {isHome && <p class="header-tag" set:html={t('brand.tagline')} />}
+      <button type="button" class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="siteNav">
+        <span class="nav-toggle-bars" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="visually-hidden">{t('a11y.menu')}</span>
+      </button>
+    </div>
+
+  </div>
+</header>

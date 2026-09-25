@@ -1,0 +1,58 @@
+---
+/* Terms of Use or Privacy Policy, in either language. Copy:
+   src/content/legal.ts. Each section is built from its keys
+   (doc.sN.h, .p or .p1, .l1…, .p2, .addr), so adding a section or a
+   paragraph there needs no change here. */
+import { legal } from '../content/legal';
+import { localePath, useT, type Lang } from '../i18n';
+import { EMAIL } from '../settings';
+
+interface Props { lang: Lang; doc: 'terms' | 'privacy' }
+const { lang, doc } = Astro.props;
+const t = useT(lang);
+const keys = Object.keys(legal.en);
+
+const sections = [];
+for (let i = 1; keys.includes(`${doc}.s${i}.h`); i++) {
+  const k = `${doc}.s${i}`;
+  const has = (suffix: string) => keys.includes(`${k}.${suffix}`);
+  const list = keys.filter((key) => key.startsWith(`${k}.l`));
+  sections.push({
+    h: t(`${k}.h`),
+    before: ['p', 'p1'].filter(has).map((s) => t(`${k}.${s}`)),
+    list: list.map(t),
+    after: ['p2'].filter(has).map((s) => t(`${k}.${s}`)),
+    addr: has('addr') ? t(`${k}.addr`) : null,
+  });
+}
+---
+<div class="shell legal-shell">
+
+  <p class="legal-back"><a href={localePath(lang)}>{t('legal.back')}</a></p>
+
+  <header class="legal-head">
+    <h1 class="display">{t(`${doc}.title`)}</h1>
+    <p class="legal-meta">
+      <span>{t('legal.updated')}</span>:{' '}
+      <span>{t('legal.date')}</span>
+    </p>
+    <p class="lede">{t(`${doc}.intro`)}</p>
+    <p class="legal-entity">{t('legal.entity')}</p>
+  </header>
+
+  {sections.map((s) => (
+    <section class="legal-section">
+      <h2>{s.h}</h2>
+      {s.before.map((p) => <p>{p}</p>)}
+      {s.list.length > 0 && <ul class="legal-list">{s.list.map((li) => <li>{li}</li>)}</ul>}
+      {s.after.map((p) => <p>{p}</p>)}
+      {s.addr && <p class="legal-address">{s.addr}</p>}
+    </section>
+  ))}
+
+  <p class="legal-contact">
+    <span>{t('legal.questions')}</span>{' '}
+    <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+  </p>
+
+</div>

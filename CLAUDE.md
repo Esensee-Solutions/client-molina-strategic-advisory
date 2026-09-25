@@ -24,11 +24,12 @@ Use these in code, commits and pull requests.
 
 ## How the site works today
 
-- Plain HTML, CSS and JavaScript. No build step, no dependencies, no framework. Open `index.html` in a browser.
-- **All copy lives in `assets/js/content.js`** (legal pages: `assets/js/legal-content.js`), under `en` and `es` with the same keys. `index.html` refers to text by `data-i18n` key. Details in `README.md`.
-- `terms.html` and `privacy.html` are the only other pages.
-- `python3 build-single-file.py` makes a one-file preview to email. It's a snapshot, never the source.
-- It isn't on the Site kit or Esensee's Cloudflare Workers setup yet. Moving it to Astro and the Site kit is planned; don't start that unless asked.
+- **Astro**, static output. `npm install`, then `npm run dev` to work and `npm run build` to make `dist/`. Node 22.12+.
+- **All copy lives in `src/content/site.ts`** (legal pages: `src/content/legal.ts`), under `en` and `es` with the same keys. Components look text up with `t('key')`. Details in `README.md`.
+- English is at `/`, Spanish at `/es/`. The pages are home, `terms/` and `privacy/` in each.
+- The Calendly link, email and LinkedIn are in `src/settings.ts`.
+- `python3 build-single-file.py` makes a one-file preview to email from `dist/`. It's a snapshot, never the source.
+- It isn't on the Site kit or Esensee's Cloudflare Workers deploy yet. When the Site kit exists, its SEO tags, language switch and deploy replace this site's own; the look stays. Don't start that unless asked.
 
 ## Rules
 
@@ -43,5 +44,5 @@ Use these in code, commits and pull requests.
 ## Working
 
 - Work on a branch and open a pull request into `main`.
-- Run `python3 check.py` before every pull request. It checks both languages have the same keys, the
+- Run `npm run check` and `npm run build` before every pull request. It checks both languages have the same keys, the
   disclaimer, and the never-say list. Then check the change in a browser at phone width, in both languages.
