@@ -1,7 +1,8 @@
 # Molina Strategic Advisory — Website (Phase 1)
 
-A one-page site for Molina Strategic Advisory, built to the approved content
-brief. Plain HTML, CSS and JavaScript — no build step, no dependencies, no
+A one-page site for Molina Strategic Advisory, built to the Design brief
+(`docs/brief.md`). Esensee builds and runs it; MSA is Esensee's Founding
+Partner. Working rules are in `CLAUDE.md`. Plain HTML, CSS and JavaScript — no build step, no dependencies, no
 framework. Open `index.html` in a browser and it runs.
 
 Bilingual (English / Spanish) with a toggle in the header.
@@ -11,7 +12,11 @@ Bilingual (English / Spanish) with a toggle in the header.
 ## Files
 
 ```
-msa-website/
+client-molina-strategic-advisory/
+├── CLAUDE.md               Working rules for anyone (human or AI) changing the site.
+├── docs/brief.md           The Design brief. Every change is checked against it.
+├── build-single-file.py    Flattens a page into one file for emailing.
+├── check.py              Checks the copy against CLAUDE.md's rules. Run before every pull request.
 ├── index.html              The one-page site. Text is referenced by key, not written inline.
 ├── terms.html              Terms of Use.
 ├── privacy.html            Privacy Policy.
@@ -19,9 +24,11 @@ msa-website/
 │   ├── css/styles.css      Design system + all layout.
 │   ├── js/content.js       ← ALL SITE COPY LIVES HERE (English + Spanish).
 │   ├── js/legal-content.js Terms and Privacy copy (English + Spanish).
-│   ├── js/main.js          Language switch, navigation, scroll behavior, contact form.
+│   ├── js/main.js          Language switch, navigation, scroll behavior, Calendly embed.
 │   └── img/
-│       ├── logo-mark.svg   Stand-in monogram — replace with the official artwork.
+│       ├── logo.png        Header lockup.
+│       ├── logo-mark.png   Favicon and Apple touch icon.
+│       ├── og-image.jpg    Share card.
 │       └── waleska.jpg     Founder photograph (900x1200).
 └── README.md
 ```
@@ -38,6 +45,10 @@ Open `assets/js/content.js`. Every visible string appears twice — once under
 Change the text between the quotes. Do not change the key on the left.
 Keep both languages in sync: if you edit an English string, edit its Spanish
 counterpart too.
+
+Then run `python3 check.py`. It fails if a key exists in only one language,
+if a page refers to a key that has no copy, or if the copy breaks the brief's
+never-say list (prices, ADP certification claims, a missing disclaimer).
 
 To add a new piece of text, give the element in `index.html` a
 `data-i18n="some.key"` attribute, then add `'some.key'` to both `en` and `es`.
@@ -74,7 +85,7 @@ Replace it with the real scheduling link. Nothing else needs touching.
 While that URL still contains the word `placeholder`, the page deliberately
 does **not** load Calendly — it renders a styled stand-in panel instead. A fake
 Calendly URL would otherwise embed a "page not found" screen, which looks
-broken when showing the site to a client. Change the URL and the real widget
+broken when showing the site to MSA or a Customer. Change the URL and the real widget
 loads automatically.
 
 The embed passes Calendly's theming parameters (`background_color`,
@@ -94,18 +105,17 @@ someone else's details rather than booking for themselves.
 
 ## Hosting
 
-Static files — nothing to compile. Upload the `msa-website` folder as-is, or
-point a host at this directory in the repository.
+Static files — nothing to compile. Point a host at the repository root, or
+upload its files as-is.
 
 The domain is `molinastrategicadvisory.com`, and the page declares it in its
 canonical URL and Open Graph tags. If the site ends up on a different domain,
 update both in the `<head>` of `index.html`, or search engines will keep
 pointing at the wrong address.
 
-Recommended: **Vercel**, **Netlify** or **Cloudflare Pages**. All three are free
-for a site this size, serve over HTTPS automatically, and connect a custom
-domain through DNS records at the registrar. Traditional shared hosting works
-too — it is plain HTML.
+The site is not on Esensee's Site kit or Cloudflare Workers setup yet; moving
+it to Astro and the Site kit is planned, and waits until Esensee starts it.
+Until then any static host works — it is plain HTML.
 
 Whichever host, set it to serve `index.html` at the root.
 
@@ -167,12 +177,12 @@ in the browser, the absence of tracking cookies. An attorney should review it.
 
 Jurisdiction and address are filled in:
 
-2. ~~**Governing state.**~~ The Terms are governed by the laws of the
+1. ~~**Governing state.**~~ The Terms are governed by the laws of the
    **Commonwealth of Puerto Rico**. Note the wording: Puerto Rico is a
    Commonwealth, not a state, so the clause does not say "State of", and the
    Spanish version uses the official name, *Estado Libre Asociado de Puerto
    Rico*.
-3. ~~**Mailing address.**~~ HC 74 Box 6105, Naranjito, PR 00719.
+2. ~~**Mailing address.**~~ HC 74 Box 6105, Naranjito, PR 00719.
 
 Both pages carry a last-updated date (`legal.date`). Set it to the launch date,
 and change it whenever the text is revised.

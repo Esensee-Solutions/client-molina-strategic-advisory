@@ -43,4 +43,5 @@ Use these in code, commits and pull requests.
 ## Working
 
 - Work on a branch and open a pull request into `main`.
-- Check every change in a browser at phone width, in both languages.
+- Run `python3 check.py` before every pull request. It checks both languages have the same keys, the
+  disclaimer, and the never-say list. Then check the change in a browser at phone width, in both languages.
