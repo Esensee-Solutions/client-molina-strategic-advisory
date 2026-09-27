@@ -1,0 +1,19 @@
+// The site on Cloudflare Workers (Esensee ADR 0003). There is no Worker code:
+// Cloudflare serves the built files in dist/ as they are, and reads
+// dist/_redirects. GitHub Actions builds and deploys (.github/workflows/site.yml).
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "molina-strategic-advisory",
+  "compatibility_date": "2026-09-25",
+  "assets": {
+    "directory": "./dist",
+    // /es and /es/ both serve es/index.html.
+    "html_handling": "auto-trailing-slash"
+  },
+  // The workers.dev address and per-version preview links, used for pull
+  // request previews until the domain is connected.
+  "workers_dev": true,
+  "preview_urls": true
+  // Once molinastrategicadvisory.com is on Esensee's Cloudflare account:
+  // "routes": [{ "pattern": "molinastrategicadvisory.com", "custom_domain": true }]
+}

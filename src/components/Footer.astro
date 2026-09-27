@@ -1,0 +1,40 @@
+---
+import { localePath, useT, type Lang } from '../i18n';
+import { EMAIL, LINKEDIN } from '../settings';
+
+interface Props { lang: Lang; page: string }
+const { lang, page } = Astro.props;
+const t = useT(lang);
+const home = page === '' ? '' : localePath(lang);
+const sections = ['services', 'diagnostic', 'about', 'referrals', 'contact'];
+---
+<footer class="site-footer">
+  <div class="shell footer-inner">
+    <div class="footer-brand">
+      <span class="brand-word">
+        <span class="brand-name">MOLINA</span>
+        <span class="brand-sub">STRATEGIC ADVISORY</span>
+      </span>
+      <p class="footer-line">{t('brand.line')}</p>
+    </div>
+
+    <nav class="footer-nav" aria-label="Footer">
+      {sections.map((id) => <a href={`${home}#${id}`}>{t(`nav.${id}`)}</a>)}
+    </nav>
+
+    <div class="footer-contact">
+      <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+      <a href={LINKEDIN} target="_blank" rel="noopener">LinkedIn</a>
+      <a href={localePath(lang, 'terms/')}>{t('nav.terms')}</a>
+      <a href={localePath(lang, 'privacy/')}>{t('nav.privacy')}</a>
+    </div>
+  </div>
+
+  <div class="shell footer-legal">
+    <p class="disclaimer">{t('footer.disclaimer')}</p>
+    <p class="copyright"><span id="year">{new Date().getFullYear()}</span> &copy; Molina Strategic Advisory. {t('footer.rights')}</p>
+  </div>
+  <div class="shell footer-dba">
+    <p>{t('footer.dba')}</p>
+  </div>
+</footer>

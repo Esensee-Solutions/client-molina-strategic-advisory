@@ -1,0 +1,309 @@
+---
+/* The homepage, in either language. Copy: src/content/site.ts. */
+import { useT, type Lang } from '../i18n';
+import { CALENDLY_URL, EMAIL } from '../settings';
+
+interface Props { lang: Lang }
+const t = useT(Astro.props.lang);
+const live = !/placeholder/i.test(CALENDLY_URL);
+---
+<!-- ============ HERO ============ -->
+<section class="hero" id="home">
+  <div class="hero-media" aria-hidden="true"></div>
+  <div class="shell hero-inner">
+    <div class="hero-copy reveal">
+      <p class="eyebrow eyebrow-light">{t('brand.line')}</p>
+      <h1 class="display">{t('hero.headline')}</h1>
+      <p class="hero-support">{t('hero.support')}</p>
+      <div class="btn-row">
+        <a class="btn btn-gold" href="#contact">{t('cta.consult')}</a>
+        <a class="btn btn-ghost" href="#diagnostic">{t('cta.diagnostic')}</a>
+      </div>
+    </div>
+    <aside class="hero-aside reveal">
+      <p class="pull-quote">{t('hero.pull')}</p>
+    </aside>
+  </div>
+</section>
+
+<!-- ============ CHALLENGE / PROBLEM ============ -->
+<section class="section section-challenge">
+  <div class="shell challenge-grid">
+    <div class="reveal">
+      <h2 class="display challenge-question">{t('challenge.title')}</h2>
+    </div>
+    <div class="reveal">
+      <p class="lede">{t('challenge.body')}</p>
+      <p>{t('challenge.body2')}</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section class="section section-services" id="services">
+  <div class="shell">
+    <div class="section-head services-head">
+      <div class="reveal">
+        <p class="eyebrow">{t('services.eyebrow')}</p>
+        <h2 class="display">{t('services.title')}</h2>
+        <p class="muted">{t('services.intro')}</p>
+      </div>
+    </div>
+
+    <div class="card-grid cols-4">
+
+      <article class="card reveal">
+        <span class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 32 32" focusable="false"><circle cx="12" cy="11" r="4.5"/><path d="M4 27c0-4.4 3.6-8 8-8s8 3.6 8 8"/><circle cx="23" cy="12.5" r="3.5"/><path d="M22 19.5c3.4.5 6 3.4 6 7"/></svg>
+        </span>
+        <h3>{t('svc.people.title')}</h3>
+        <p>{t('svc.people.desc')}</p>
+        <ul class="tick-list">
+          <li>{t('svc.people.i1')}</li>
+          <li>{t('svc.people.i2')}</li>
+          <li>{t('svc.people.i3')}</li>
+          <li>{t('svc.people.i4')}</li>
+          <li>{t('svc.people.i5')}</li>
+          <li>{t('svc.people.i6')}</li>
+        </ul>
+      </article>
+
+      <article class="card reveal">
+        <span class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 32 32" focusable="false"><circle cx="16" cy="16" r="5"/><path d="M16 3v4M16 25v4M3 16h4M25 16h4M7 7l3 3M22 22l3 3M25 7l-3 3M10 22l-3 3"/></svg>
+        </span>
+        <h3>{t('svc.payroll.title')}</h3>
+        <p>{t('svc.payroll.desc')}</p>
+        <ul class="tick-list">
+          <li>{t('svc.payroll.i1')}</li>
+          <li>{t('svc.payroll.i2')}</li>
+          <li>{t('svc.payroll.i3')}</li>
+          <li>{t('svc.payroll.i4')}</li>
+          <li>{t('svc.payroll.i5')}</li>
+          <li>{t('svc.payroll.i6')}</li>
+        </ul>
+      </article>
+
+      <article class="card reveal">
+        <span class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 32 32" focusable="false"><path d="M5 27V15M13 27V8M21 27v-9M29 27V4"/></svg>
+        </span>
+        <h3>{t('svc.ops.title')}</h3>
+        <p>{t('svc.ops.desc')}</p>
+        <ul class="tick-list">
+          <li>{t('svc.ops.i1')}</li>
+          <li>{t('svc.ops.i2')}</li>
+          <li>{t('svc.ops.i3')}</li>
+          <li>{t('svc.ops.i4')}</li>
+          <li>{t('svc.ops.i5')}</li>
+          <li>{t('svc.ops.i6')}</li>
+        </ul>
+      </article>
+
+      <article class="card reveal">
+        <span class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 32 32" focusable="false"><circle cx="16" cy="16" r="12"/><circle cx="16" cy="16" r="6.5"/><circle cx="16" cy="16" r="1.5" class="fill"/><path d="M16 16l9-9M23 4l2 3 3 2-3 1-1 3-2-3-3-2z" class="fill-soft"/></svg>
+        </span>
+        <h3>{t('svc.sales.title')}</h3>
+        <p>{t('svc.sales.desc')}</p>
+        <ul class="tick-list">
+          <li>{t('svc.sales.i1')}</li>
+          <li>{t('svc.sales.i2')}</li>
+          <li>{t('svc.sales.i3')}</li>
+          <li>{t('svc.sales.i4')}</li>
+          <li>{t('svc.sales.i5')}</li>
+          <li>{t('svc.sales.i6')}</li>
+        </ul>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ DIAGNOSTIC ============ -->
+<section class="section section-dark" id="diagnostic">
+  <div class="shell">
+    <div class="diag-head">
+      <div class="reveal">
+        <p class="eyebrow eyebrow-light">{t('diag.eyebrow')}</p>
+        <h2 class="display">{t('diag.title')}</h2>
+      </div>
+      <div class="reveal">
+        <p class="lede">{t('diag.intro')}</p>
+        <a class="btn btn-gold" href="#contact">{t('cta.diagnostic')}</a>
+      </div>
+    </div>
+
+    <h3 class="sub-head reveal">{t('diag.areasTitle')}</h3>
+    <div class="card-grid cols-3 areas">
+      <article class="area reveal"><h4>{t('diag.a1.t')}</h4><p>{t('diag.a1.d')}</p></article>
+      <article class="area reveal"><h4>{t('diag.a2.t')}</h4><p>{t('diag.a2.d')}</p></article>
+      <article class="area reveal"><h4>{t('diag.a3.t')}</h4><p>{t('diag.a3.d')}</p></article>
+      <article class="area reveal"><h4>{t('diag.a4.t')}</h4><p>{t('diag.a4.d')}</p></article>
+      <article class="area reveal"><h4>{t('diag.a5.t')}</h4><p>{t('diag.a5.d')}</p></article>
+      <article class="area reveal"><h4>{t('diag.a6.t')}</h4><p>{t('diag.a6.d')}</p></article>
+    </div>
+
+    <div class="deliverables reveal">
+      <h3 class="sub-head">{t('diag.delivTitle')}</h3>
+      <ol class="deliv-list">
+        <li>{t('diag.d1')}</li>
+        <li>{t('diag.d2')}</li>
+        <li>{t('diag.d3')}</li>
+        <li>{t('diag.d4')}</li>
+        <li>{t('diag.d5')}</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WAYS TO WORK ============ -->
+<section class="section section-alt" id="engagements">
+  <div class="shell">
+    <div class="section-head reveal">
+      <p class="eyebrow">{t('ways.eyebrow')}</p>
+      <h2 class="display">{t('ways.title')}</h2>
+    </div>
+    <div class="card-grid cols-4">
+      <article class="card card-flat reveal"><h3>{t('ways.w1.t')}</h3><p>{t('ways.w1.d')}</p></article>
+      <article class="card card-flat reveal"><h3>{t('ways.w2.t')}</h3><p>{t('ways.w2.d')}</p></article>
+      <article class="card card-flat reveal"><h3>{t('ways.w3.t')}</h3><p>{t('ways.w3.d')}</p></article>
+      <article class="card card-flat reveal"><h3>{t('ways.w4.t')}</h3><p>{t('ways.w4.d')}</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GOOD FIT ============ -->
+<section class="section section-fit" id="fit">
+  <div class="shell">
+    <div class="section-head reveal">
+      <p class="eyebrow">{t('fit.eyebrow')}</p>
+      <h2 class="display">{t('fit.title')}</h2>
+    </div>
+    <ul class="fit-grid">
+      <li class="fit-item reveal">{t('fit.i1')}</li>
+      <li class="fit-item reveal">{t('fit.i2')}</li>
+      <li class="fit-item reveal">{t('fit.i3')}</li>
+      <li class="fit-item reveal">{t('fit.i4')}</li>
+      <li class="fit-item reveal">{t('fit.i5')}</li>
+      <li class="fit-item reveal">{t('fit.i6')}</li>
+      <li class="fit-item reveal">{t('fit.i7')}</li>
+      <li class="fit-item reveal">{t('fit.i8')}</li>
+      <li class="fit-item reveal">{t('fit.i9')}</li>
+      <li class="fit-item reveal">{t('fit.i10')}</li>
+    </ul>
+    <div class="fit-cta reveal">
+      <a class="btn btn-dark" href="#contact">{t('cta.consult')}</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="section section-about" id="about">
+  <div class="shell about-grid">
+    <div class="about-copy reveal">
+      <p class="eyebrow">{t('about.eyebrow')}</p>
+      <h2 class="display">{t('about.name')}</h2>
+      <p class="about-role">{t('about.role')}</p>
+      <p>{t('about.bio1')}</p>
+      <p>{t('about.bio2')}</p>
+    </div>
+    <figure class="about-figure reveal">
+      <div class="portrait">
+        <img src="/assets/img/waleska.jpg" width="900" height="1200" loading="lazy" alt="Waleska Molina Oyola">
+      </div>
+      <figcaption class="portrait-quote">
+        <blockquote>{t('about.quote')}</blockquote>
+        <cite>{t('about.name')}</cite>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ REFERRAL PARTNERS ============ -->
+<section class="section section-alt" id="referrals">
+  <div class="shell">
+    <div class="section-head reveal">
+      <p class="eyebrow">{t('ref.eyebrow')}</p>
+      <h2 class="display">{t('ref.title')}</h2>
+      <p class="lede">{t('ref.lede')}</p>
+      <p class="muted">{t('ref.body')}</p>
+    </div>
+
+    <ul class="partner-row reveal">
+      <li>{t('ref.p1')}</li>
+      <li>{t('ref.p2')}</li>
+      <li>{t('ref.p3')}</li>
+      <li>{t('ref.p4')}</li>
+    </ul>
+
+    <div class="signals reveal">
+      <h3 class="sub-head sub-head-dark">{t('ref.signalsTitle')}</h3>
+      <ul class="tick-list two-col">
+        <li>{t('ref.s1')}</li>
+        <li>{t('ref.s2')}</li>
+        <li>{t('ref.s3')}</li>
+        <li>{t('ref.s4')}</li>
+        <li>{t('ref.s5')}</li>
+        <li>{t('ref.s6')}</li>
+        <li>{t('ref.s7')}</li>
+        <li>{t('ref.s8')}</li>
+      </ul>
+      <a class="btn btn-dark" href="#contact">{t('cta.refer')}</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="section section-dark section-contact" id="contact">
+  <div class="shell contact-grid">
+
+    <div class="contact-copy reveal">
+      <p class="eyebrow eyebrow-light">{t('contact.eyebrow')}</p>
+      <h2 class="display">{t('contact.title')}</h2>
+      <p class="lede">{t('contact.body')}</p>
+      <ul class="contact-points">
+        <li>{t('cta.consult')}</li>
+        <li>{t('cta.diagnostic')}</li>
+        <li>{t('cta.refer')}</li>
+      </ul>
+    </div>
+
+    <div class="scheduler reveal">
+      <h3 class="sub-head">{t('contact.schedule')}</h3>
+
+      <!-- Calendly inline embed. TO GO LIVE: set CALENDLY_URL in src/settings.ts.
+           While that URL still contains "placeholder", this stand-in shows
+           instead of a broken booking page. -->
+      {live ? (
+        <div id="calendlyMount" class="calendly-mount" data-url={CALENDLY_URL}></div>
+      ) : (
+        <div id="calendlyMount" class="calendly-mount calendly-mount-empty">
+          <div class="sched-stand-in">
+            <span class="sched-icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4"
+                   stroke-linecap="round" stroke-linejoin="round">
+                <rect x="4" y="7" width="24" height="21" rx="2"/>
+                <path d="M4 13h24M11 4v6M21 4v6"/>
+                <path d="M10 19h4M18 19h4M10 24h4"/>
+              </svg>
+            </span>
+            <h4 class="sched-title">{t('sched.title')}</h4>
+            <p class="sched-body">{t('sched.body')}</p>
+            <ul class="sched-list">
+              <li>{t('sched.m1')}</li>
+              <li>{t('sched.m2')}</li>
+              <li>{t('sched.m3')}</li>
+            </ul>
+          </div>
+        </div>
+      )}
+
+      <p class="scheduler-fallback">
+        <span>{t('contact.fallback')}</span>{' '}
+        <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+      </p>
+    </div>
+
+  </div>
+</section>

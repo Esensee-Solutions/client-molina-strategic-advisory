@@ -1,10 +1,11 @@
 /* ==========================================================================
    Molina Strategic Advisory — site copy (EN / ES)
-   All visible text lives here. Edit copy in this file only; index.html
-   holds structure and references each string by its data-i18n key.
+   All visible text on the homepage, header and footer lives here. Edit copy
+   in this file only; the components hold structure and look each string up
+   by its key with t('key'). Both languages must have the same keys.
    ========================================================================== */
 
-window.MSA_CONTENT = {
+export const site = {
 
   /* ------------------------------------------------------------------ EN */
   en: {
@@ -327,4 +328,4 @@ window.MSA_CONTENT = {
     'footer.dba': 'Molina Strategic Advisory es un nombre comercial registrado (DBA) de Wala Isla Glow LLC.',
     'footer.rights': 'Todos los derechos reservados.'
   }
-};
+} satisfies Record<'en' | 'es', Record<string, string>>;

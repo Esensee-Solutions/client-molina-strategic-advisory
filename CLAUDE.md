@@ -24,11 +24,38 @@ Use these in code, commits and pull requests.
 
 ## How the site works today
 
-- Plain HTML, CSS and JavaScript. No build step, no dependencies, no framework. Open `index.html` in a browser.
-- **All copy lives in `assets/js/content.js`** (legal pages: `assets/js/legal-content.js`), under `en` and `es` with the same keys. `index.html` refers to text by `data-i18n` key. Details in `README.md`.
-- `terms.html` and `privacy.html` are the only other pages.
-- `python3 build-single-file.py` makes a one-file preview to email. It's a snapshot, never the source.
-- It isn't on the Site kit or Esensee's Cloudflare Workers setup yet. Moving it to Astro and the Site kit is planned; don't start that unless asked.
+- **Astro**, static output. `npm install`, then `npm run dev` to work and `npm run build` to make `dist/`. Node 22.12+.
+- **All copy lives in `src/content/site.ts`** (legal pages: `src/content/legal.ts`), under `en` and `es` with the same keys. Components look text up with `t('key')`. Details in `README.md`.
+- English is at `/`, Spanish at `/es/`. The pages are home, `terms/` and `privacy/` in each.
+- The Calendly link, email and LinkedIn are in `src/settings.ts`.
+- `python3 build-single-file.py` makes a one-file preview to email from `dist/`. It's a snapshot, never the source.
+- Cloudflare serves `dist/` from the Worker `molina-strategic-advisory` (`wrangler.jsonc`). There is no Worker code.
+- It isn't on the Site kit yet. When the Site kit exists, its SEO tags, language switch and deploy replace this site's own; the look stays. Don't start that unless asked.
+
+## From pull request to live
+
+Every change reaches the site the same way. The pull request is the unit of approval.
+
+1. **Pull request.** GitHub Actions (`.github/workflows/site.yml`) checks and builds it, uploads
+   it as a preview version and comments its link on the pull request:
+   `https://pr-<number>-molina-strategic-advisory.<account>.workers.dev`.
+2. **Approval.** Esensee opens the preview link on a phone. For a Change request, Esensee sends
+   the link to Waleska and waits for a yes. The link only shows the change; approving is the
+   yes, and nothing goes live from it.
+3. **Merge into `main`.** GitHub Actions deploys it: the change is live within a minute.
+
+Where "live" is:
+
+- **Today** (the domain isn't connected yet): the Worker's own address,
+  `https://molina-strategic-advisory.<account>.workers.dev`.
+- **Once `molinastrategicadvisory.com` is connected**: `https://molinastrategicadvisory.com`
+  only, with `www` forwarding to it. The pull request that connects the domain uncomments the
+  `routes` line in `wrangler.jsonc` and sets `"workers_dev": false`, so the site answers on one
+  address. `"preview_urls": true` stays written out, which keeps step 1's preview links working.
+- **Going back**: `npx wrangler rollback` returns to the previous version.
+
+Links sent to Waleska or anyone outside Esensee are preview links (for a yes) or
+`https://molinastrategicadvisory.com` (once connected).
 
 ## Rules
 
@@ -36,11 +63,12 @@ Use these in code, commits and pull requests.
 - **The look belongs to this site.** Palette from the logo, Cinzel / Source Serif 4 / Inter, navy sections (see `README.md`). Don't copy another site's design.
 - **Both languages together.** Every text change is made in English and Spanish in the same pull request.
 - **What the site never says** (from the brief): no prices or package prices, and never "ADP Certified" or "ADP Partner" (it's "extensive hands-on ADP experience"). Keep the footer's no-legal-or-tax-advice disclaimer.
-- **Legal pages.** If the site starts setting cookies or tracking, the Privacy Policy must change in the same pull request.
+- **Legal pages.** If the site starts setting cookies or tracking, including Cloudflare Web Analytics, the Privacy Policy must change in the same pull request.
 - **Phone first.** No horizontal scroll at 390px. Keep WCAG AA contrast and the reduced-motion setting working.
 - **No secrets in the repository.**
 
 ## Working
 
-- Work on a branch and open a pull request into `main`.
-- Check every change in a browser at phone width, in both languages.
+- Work on a branch and open a pull request into `main`. Merging into `main` puts the site live.
+- Run `npm run check` and `npm run build` before every pull request. It checks both languages have the same keys, the
+  disclaimer, and the never-say list. Then check the change in a browser at phone width, in both languages.
