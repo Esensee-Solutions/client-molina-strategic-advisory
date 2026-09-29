@@ -1,6 +1,6 @@
 ---
 import { localePath, useT, type Lang } from '../i18n';
-import { EMAIL, LINKEDIN } from '../settings';
+import { EMAIL, ESENSEE_URL, LINKEDIN } from '../settings';
 
 interface Props { lang: Lang; page: string }
 const { lang, page } = Astro.props;
@@ -36,5 +36,6 @@ const sections = ['services', 'diagnostic', 'about', 'referrals', 'contact'];
   </div>
   <div class="shell footer-dba">
     <p>{t('footer.dba')}</p>
+    <p class="built-by">{t('footer.builtby')} <a href={ESENSEE_URL} target="_blank" rel="noopener">Esensee Solutions</a></p>
   </div>
 </footer>

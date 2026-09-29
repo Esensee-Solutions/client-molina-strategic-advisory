@@ -10,3 +10,6 @@ export const CALENDLY_URL = 'https://calendly.com/waleska-molinastrategicadvisor
 
 export const EMAIL = 'waleska@molinastrategicadvisory.com';
 export const LINKEDIN = 'https://www.linkedin.com/in/waleska-molina-oyola-8a22a8b9/';
+
+/* Esensee builds and runs the site; the footer credits it. */
+export const ESENSEE_URL = 'https://esensee-solutions.com';

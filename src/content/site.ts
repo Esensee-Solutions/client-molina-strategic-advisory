@@ -165,7 +165,8 @@ export const site = {
     'nav.terms': 'Terms of Use',
     'nav.privacy': 'Privacy Policy',
     'footer.dba': 'Molina Strategic Advisory is a registered trade name (DBA) of Wala Isla Glow LLC.',
-    'footer.rights': 'All rights reserved.'
+    'footer.rights': 'All rights reserved.',
+    'footer.builtby': 'Built by'
   },
 
   /* ------------------------------------------------------------------ ES */
@@ -326,6 +327,7 @@ export const site = {
     'nav.terms': 'Términos de Uso',
     'nav.privacy': 'Política de Privacidad',
     'footer.dba': 'Molina Strategic Advisory es un nombre comercial registrado (DBA) de Wala Isla Glow LLC.',
-    'footer.rights': 'Todos los derechos reservados.'
+    'footer.rights': 'Todos los derechos reservados.',
+    'footer.builtby': 'Creado por'
   }
 } satisfies Record<'en' | 'es', Record<string, string>>;
