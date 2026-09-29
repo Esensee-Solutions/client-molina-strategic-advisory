@@ -174,10 +174,14 @@ To see the Workers version on your machine: `npm run build`, then
 Going back to an earlier version: `npx wrangler rollback`, or
 **Workers & Pages → molina-strategic-advisory → Deployments** in Cloudflare.
 
-**Not connected yet:** the domain. Once `molinastrategicadvisory.com` is on
-Esensee's Cloudflare account (copy every MX and TXT record first, or email
-stops), uncomment the `routes` line in `wrangler.jsonc` and forward `www` to
-the bare domain. Until then the site is at its `workers.dev` address.
+**The domain.** The site is live at `https://molinastrategicadvisory.com`
+only: `wrangler.jsonc` sets it as the Worker's custom domain and turns the
+`workers.dev` address off (`preview_urls` stays on for pull request previews).
+`www` forwards to the bare domain with a Redirect Rule in the Cloudflare
+dashboard (**Rules → Redirect Rules**, "Redirect from WWW to root"), which needs
+the proxied `www` DNS record to stay. The domain's DNS is on Esensee's
+Cloudflare account; email is Hostinger's (the MX and SPF records), so leave
+those records alone.
 
 
 ### Share previews
