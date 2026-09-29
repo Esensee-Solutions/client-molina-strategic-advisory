@@ -1,0 +1,11 @@
+{
+  "name": "Molina Strategic Advisory",
+  "short_name": "Molina",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/assets/img/logo-mark.png", "sizes": "256x256", "type": "image/png" }
+  ],
+  "theme_color": "#13243F",
+  "background_color": "#ffffff",
+  "display": "browser"
+}
