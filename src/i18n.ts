@@ -8,6 +8,9 @@ import { legal } from './content/legal';
 export const languages = ['en', 'es'] as const;
 export type Lang = (typeof languages)[number];
 
+/** Every page, by its address without the language prefix. The sitemap lists these. */
+export const pages = ['', 'terms/', 'privacy/'] as const;
+
 const copy: Record<Lang, Record<string, string>> = {
   en: { ...site.en, ...legal.en },
   es: { ...site.es, ...legal.es },

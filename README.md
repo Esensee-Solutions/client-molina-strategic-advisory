@@ -43,6 +43,7 @@ client-molina-strategic-advisory/
 │   ├── layouts/Layout.astro  <head>, header, footer on every page.
 │   ├── components/           Header, Footer, Home (all homepage sections), Legal.
 │   ├── pages/                One file per address: index, terms, privacy, and es/ for Spanish.
+│   │                         Also sitemap.xml, robots.txt and llms.txt, built from the copy.
 │   ├── scripts/main.ts       Navigation, scroll behavior, reveal, Calendly embed.
 │   └── styles/styles.css     Design system + all layout.
 ├── public/                   Copied as-is to the site.
