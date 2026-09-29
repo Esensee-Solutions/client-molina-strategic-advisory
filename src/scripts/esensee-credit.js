@@ -4,9 +4,11 @@
 // <esensee-credit>: the Credit, the "made by Esensee" line at the bottom of every Client site's footer.
 //
 // It takes the look of the footer it sits in (its color and font are inherited), so it never
-// brings Esensee's look into a Client's site: the look belongs to the site (docs/adr/0004). The
-// words stay still; only the Esensee mark moves: it builds itself bar by bar when the footer
-// scrolls into view, and its bars shuffle on hover. With reduced motion on, nothing moves.
+// brings Esensee's look into a Client's site: the look belongs to the site (docs/adr/0004). It
+// signs itself once, the first time the footer scrolls into view, like an artist signing a
+// finished painting: a pen traces the Esensee mark bar by bar, the mark fills in, the words write
+// on, and a flourish underlines the name. Then it stays
+// still. With reduced motion on, it's already signed.
 //
 // Use it in a Client's footer (the plain link inside is what shows if the script doesn't load):
 //
@@ -100,28 +102,44 @@ export function pickAccent(candidates, background) {
   return null;
 }
 
+// The outline length of each bar, for tracing it with a dash.
+const barLength = (p) => {
+  const v = p.split(' ').map((q) => q.split(',').map(Number));
+  return Math.ceil(v.reduce((sum, a, i) => sum + Math.hypot(v[(i + 1) % v.length][0] - a[0], v[(i + 1) % v.length][1] - a[1]), 0));
+};
+
 const CSS = `
   :host { display: inline-block; color: inherit; font: inherit; line-height: 1.4; }
   a {
-    display: inline-flex; align-items: center; gap: .5em; color: inherit; text-decoration: none;
+    display: inline-flex; align-items: center; gap: .55em; color: inherit; text-decoration: none;
     border-radius: 4px; outline-offset: 3px; -webkit-tap-highlight-color: transparent;
   }
   a:focus-visible { outline: 2px solid currentColor; }
-  svg { width: 1.35em; height: auto; flex: none; overflow: visible; }
-  polygon { fill: var(--esensee-mark, currentColor); }
-  .text { white-space: nowrap; }
+  svg { overflow: visible; }
+  .mark { width: 1.9em; height: auto; flex: none; }
+  polygon { fill: var(--esensee-mark, currentColor); stroke: var(--esensee-mark, currentColor); stroke-width: 20; stroke-linejoin: round; }
+  .sig { display: inline-flex; align-items: baseline; white-space: nowrap; }
   .line { opacity: .72; }
-  .name { font-weight: 600; letter-spacing: .01em; }
+  .name { position: relative; font-weight: 600; letter-spacing: .01em; }
+  .flourish { position: absolute; left: 0; bottom: -.35em; width: 100%; height: .4em; }
+  .flourish path { fill: none; stroke: var(--esensee-mark, currentColor); stroke-width: 1.6; stroke-linecap: round; vector-effect: non-scaling-stroke; }
 
   @media (prefers-reduced-motion: no-preference) {
-    polygon { transform-box: fill-box; transform-origin: 0 100%; transition: transform .5s cubic-bezier(.2,.9,.3,1.4), opacity .4s; }
-    :host(:not([data-built])) polygon { opacity: 0; transform: translateX(-60%) skewX(-12deg); }
-    polygon:nth-child(2) { transition-delay: .09s; }
-    polygon:nth-child(3) { transition-delay: .18s; }
-    a:hover polygon, a:focus-visible polygon { animation: shuffle .6s cubic-bezier(.3,1.5,.5,1) both; }
-    a:hover polygon:nth-child(2), a:focus-visible polygon:nth-child(2) { animation-delay: .06s; }
-    a:hover polygon:nth-child(3), a:focus-visible polygon:nth-child(3) { animation-delay: .12s; }
-    @keyframes shuffle { 40% { transform: translateX(18%); } }
+    /* Before it's signed: nothing drawn yet. */
+    polygon { fill-opacity: 0; stroke-dasharray: var(--len); stroke-dashoffset: var(--len); }
+    .text { clip-path: inset(-50% 100% -50% 0); }
+    .flourish path { stroke-dasharray: 240; stroke-dashoffset: 240; }
+
+    /* Signing: trace each bar, fill, write the words, underline. */
+    :host([data-built]) polygon { animation: trace .7s cubic-bezier(.55,.1,.35,1) forwards, fill .4s ease 1.55s forwards; }
+    :host([data-built]) .b2 { animation-delay: .5s, 1.55s; }
+    :host([data-built]) .b3 { animation-delay: .95s, 1.55s; }
+    :host([data-built]) .text { animation: write .9s cubic-bezier(.3,.6,.4,1) 1.7s forwards; }
+    :host([data-built]) .flourish path { animation: trace .7s ease 2.7s forwards; }
+
+    @keyframes trace { to { stroke-dashoffset: 0; } }
+    @keyframes fill { to { fill-opacity: 1; } }
+    @keyframes write { to { clip-path: inset(-50% -10% -50% 0); } }
   }
 `;
 
@@ -156,8 +174,8 @@ class EsenseeCredit extends (globalThis.HTMLElement ?? class {}) {
     root.innerHTML = `
       <style>${CSS}</style>
       <a href="${creditHref(lang, location.hostname)}" target="_blank" rel="noopener" aria-label="${LABEL[lang]}">
-        <svg viewBox="0 0 1150 744" aria-hidden="true">${BARS.map((p) => `<polygon points="${p}"/>`).join('')}</svg>
-        <span class="text" aria-hidden="true"><span class="line">${LINE[lang]}</span> <span class="name" translate="no">Esensee Solutions</span></span>
+        <svg class="mark" viewBox="0 0 1150 744" aria-hidden="true">${BARS.map((p, i) => `<polygon class="b${i + 1}" points="${p}" style="--len:${barLength(p)}"/>`).join('')}</svg>
+        <span class="sig" aria-hidden="true"><span class="text"><span class="line">${LINE[lang]}</span> <span class="name" translate="no">Esensee Solutions<svg class="flourish" viewBox="0 0 200 8" preserveAspectRatio="none"><path d="M2,5 C40,1 80,8 120,4 S180,2 198,5"/></svg></span></span></span>
       </a>`;
     const mark = this.getAttribute('accent') || this.#brandColor();
     if (mark) this.style.setProperty('--esensee-mark', mark);
