@@ -10,10 +10,10 @@
     // /es and /es/ both serve es/index.html.
     "html_handling": "auto-trailing-slash"
   },
-  // The workers.dev address and per-version preview links, used for pull
-  // request previews until the domain is connected.
-  "workers_dev": true,
+  // The site answers on molinastrategicadvisory.com only. www forwards to it
+  // with a Cloudflare Redirect Rule (dashboard), not from here.
+  "routes": [{ "pattern": "molinastrategicadvisory.com", "custom_domain": true }],
+  "workers_dev": false,
+  // Keeps the per-version preview links that pull requests get.
   "preview_urls": true
-  // Once molinastrategicadvisory.com is on Esensee's Cloudflare account:
-  // "routes": [{ "pattern": "molinastrategicadvisory.com", "custom_domain": true }]
 }
