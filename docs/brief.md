@@ -17,6 +17,5 @@ Written after the fact, from the Phase 1 site. Confirm the gaps (marked **?**) w
 
 ## Open items
 
-- The real Calendly link (`CALENDLY_URL` in `assets/js/main.js` is still a placeholder).
 - An attorney licensed in Puerto Rico reviews Terms and Privacy before launch.
 - Where the domain and email live today, for the onboarding checklist.
