@@ -19,6 +19,7 @@
   --grey-100:#F4F6F9;
   --white:#FFFFFF;
   --ink:#1B2430;
+  --brand:var(--blue-500); /* Esensee's Credit in the footer colors its mark with this */
 
   /* Type */
   --font-mark:'Cinzel', 'Trajan Pro', Georgia, serif;
