@@ -36,6 +36,13 @@ const sections = ['services', 'diagnostic', 'about', 'referrals', 'contact'];
   </div>
   <div class="shell footer-dba">
     <p>{t('footer.dba')}</p>
-    <p class="built-by">{t('footer.builtby')} <a href={ESENSEE_URL} target="_blank" rel="noopener">Esensee Solutions</a></p>
+    <p class="built-by">
+      <esensee-credit lang={lang}><a href={ESENSEE_URL} target="_blank" rel="noopener">{t('footer.builtby')} Esensee Solutions</a></esensee-credit>
+    </p>
   </div>
 </footer>
+
+<script>
+  // Esensee's Credit: takes the footer's look, and its mark takes --brand.
+  import '../scripts/esensee-credit.js';
+</script>

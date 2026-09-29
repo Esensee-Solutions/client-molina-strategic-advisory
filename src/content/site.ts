@@ -328,6 +328,6 @@ export const site = {
     'nav.privacy': 'Política de Privacidad',
     'footer.dba': 'Molina Strategic Advisory es un nombre comercial registrado (DBA) de Wala Isla Glow LLC.',
     'footer.rights': 'Todos los derechos reservados.',
-    'footer.builtby': 'Creado por'
+    'footer.builtby': 'Built by'
   }
 } satisfies Record<'en' | 'es', Record<string, string>>;
