@@ -101,23 +101,23 @@ switch stays in English. Nothing is stored in the browser.
    the email address `waleska@molinastrategicadvisory.com` appears in the
    footer and beneath the scheduler.
 
-4. **Calendly link.** The scheduler is wired but points at a placeholder
-   account — the last thing outstanding. See *Scheduling* below.
+4. ~~**Calendly link.**~~ Done. The scheduler embeds
+   `https://calendly.com/waleska-molinastrategicadvisory/30min`. See *Scheduling* below.
 
 ## Scheduling (Calendly)
 
 The contact section embeds a Calendly booking calendar instead of a form, so
 enquiries land straight on the calendar with nothing to chase.
 
-**To go live, change one line.** In `src/settings.ts`:
+The link is one line in `src/settings.ts`:
 
 ```ts
-export const CALENDLY_URL = 'https://calendly.com/placeholder-msa/consultation';
+export const CALENDLY_URL = 'https://calendly.com/waleska-molinastrategicadvisory/30min';
 ```
 
-Replace it with the real scheduling link. Nothing else needs touching.
+To change it, replace that link. Nothing else needs touching.
 
-While that URL still contains the word `placeholder`, the page deliberately
+If that URL ever contains the word `placeholder`, the page deliberately
 does **not** load Calendly — it renders a styled stand-in panel instead. A fake
 Calendly URL would otherwise embed a "page not found" screen, which looks
 broken when showing the site to MSA or a Customer. Change the URL and the real widget
