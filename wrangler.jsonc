@@ -15,5 +15,8 @@
   "routes": [{ "pattern": "molinastrategicadvisory.com", "custom_domain": true }],
   "workers_dev": false,
   // Keeps the per-version preview links that pull requests get.
-  "preview_urls": true
+  "preview_urls": true,
+  // Cloudflare Workers Builds runs `npx wrangler preview` for branches and pull
+  // requests, which fails without this block, even empty.
+  "previews": {}
 }
