@@ -1,5 +1,5 @@
 # Checks and builds every pull request, and puts it on a preview link.
-# Merging into main puts the site live on Cloudflare Workers (Esensee ADR 0003).
+# Merging into main puts the site live on Cloudflare Workers (Estable ADR 0003).
 #
 # Needs two secrets from the esensee-solutions organization, shared with this
 # repository: CLOUDFLARE_API_TOKEN (permission: Workers Scripts, Edit) and

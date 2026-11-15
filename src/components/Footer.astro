@@ -1,6 +1,6 @@
 ---
 import { localePath, useT, type Lang } from '../i18n';
-import { EMAIL, ESENSEE_URL, LINKEDIN } from '../settings';
+import { EMAIL, ESTABLE_URL, LINKEDIN } from '../settings';
 
 interface Props { lang: Lang; page: string }
 const { lang, page } = Astro.props;
@@ -37,12 +37,12 @@ const sections = ['services', 'diagnostic', 'about', 'referrals', 'contact'];
   <div class="shell footer-dba">
     <p>{t('footer.dba')}</p>
     <p class="built-by">
-      <esensee-credit lang={lang}><a href={ESENSEE_URL} target="_blank" rel="noopener">{t('footer.builtby')} Esensee Solutions</a></esensee-credit>
+      <esensee-credit lang={lang}><a href={ESTABLE_URL} target="_blank" rel="noopener">{t('footer.builtby')} Estable Studio</a></esensee-credit>
     </p>
   </div>
 </footer>
 
 <script>
-  // Esensee's Credit: takes the footer's look, and its mark takes --brand.
+  // Estable's Credit: takes the footer's look, and its mark takes --brand.
   import '../scripts/esensee-credit.js';
 </script>

@@ -1,19 +1,19 @@
 // Copied from Esensee-Solutions/Esensee_Solutions, kit/credit/esensee-credit.js. Change it there
 // and copy it back; it moves into the Site kit when this site goes on it.
 //
-// <esensee-credit>: the Credit, the "made by Esensee" line at the bottom of every Client site's footer.
+// <esensee-credit>: the Credit, the "made by Estable" line at the bottom of every Client site's footer.
 //
 // It takes the look of the footer it sits in (its color and font are inherited), so it never
-// brings Esensee's look into a Client's site: the look belongs to the site (docs/adr/0004). It
+// brings Estable's look into a Client's site: the look belongs to the site (docs/adr/0004). It
 // signs itself once, the first time the footer scrolls into view, like an artist signing a
-// finished painting: a pen traces the Esensee mark bar by bar, the mark fills in, the words write
+// finished painting: a pen traces the Estable mark bar by bar, the mark fills in, the words write
 // on, and a flourish underlines the name. Then it stays
 // still. With reduced motion on, it's already signed.
 //
 // Use it in a Client's footer (the plain link inside is what shows if the script doesn't load):
 //
 //   <script type="module" src="/esensee-credit.js"></script>
-//   <esensee-credit lang="es"><a href="https://esensee-solutions.com/">Built by Esensee Solutions</a></esensee-credit>
+//   <esensee-credit lang="es"><a href="https://estable.studio/">Built by Estable Studio</a></esensee-credit>
 //
 // Attributes:
 //   lang    es | en. Defaults to the page's <html lang>, then Spanish.
@@ -26,9 +26,9 @@
 //
 // Like the Paused site command, this moves into the Site kit when it exists (docs/adr/0004).
 
-export const SITE = 'https://esensee-solutions.com/';
+export const SITE = 'https://estable.studio/';
 
-// The words before "Esensee Solutions": "Built by" in both languages (its link still opens the page's language).
+// The words before "Estable Studio": "Built by" in both languages (its link still opens the page's language).
 export const LINE = {
   es: 'Built by',
   en: 'Built by',
@@ -36,8 +36,8 @@ export const LINE = {
 
 // What screen readers hear.
 export const LABEL = {
-  es: 'Built by Esensee Solutions (abre esensee-solutions.com)',
-  en: 'Built by Esensee Solutions (opens esensee-solutions.com)',
+  es: 'Built by Estable Studio (abre estable.studio)',
+  en: 'Built by Estable Studio (opens estable.studio)',
 };
 
 export function pickLang(attr, pageLang) {
@@ -48,7 +48,7 @@ export function pickLang(attr, pageLang) {
   return 'es';
 }
 
-// The link to Esensee's site, tagged with the Client's domain so a visit can be traced to it.
+// The link to Estable's site, tagged with the Client's domain so a visit can be traced to it.
 export function creditHref(lang, host) {
   const url = new URL(lang === 'en' ? 'en/' : '', SITE);
   if (host) {
@@ -58,7 +58,7 @@ export function creditHref(lang, host) {
   return url.href;
 }
 
-// The three bars of the Esensee mark (the same shapes as brand/logo/mark-*.svg, in a 1150 × 744 box).
+// The three bars of the Estable mark (the same shapes as brand/logo/mark-*.svg, in a 1150 × 744 box).
 const BARS = [
   '1150,0 1150,204 563,204 238,743 0,743 449,0',
   '1017,270 1017,474 715,474 553,743 315,743 601,270',
@@ -144,7 +144,7 @@ const CSS = `
 `;
 
 // Outside a browser (the tests) there's no HTMLElement; the words and link above still load.
-class EsenseeCredit extends (globalThis.HTMLElement ?? class {}) {
+class EstableCredit extends (globalThis.HTMLElement ?? class {}) {
   static observedAttributes = ['lang', 'accent'];
 
   #observer = null;
@@ -175,7 +175,7 @@ class EsenseeCredit extends (globalThis.HTMLElement ?? class {}) {
       <style>${CSS}</style>
       <a href="${creditHref(lang, location.hostname)}" target="_blank" rel="noopener" aria-label="${LABEL[lang]}">
         <svg class="mark" viewBox="0 0 1150 744" aria-hidden="true">${BARS.map((p, i) => `<polygon class="b${i + 1}" points="${p}" style="--len:${barLength(p)}"/>`).join('')}</svg>
-        <span class="sig" aria-hidden="true"><span class="text"><span class="line">${LINE[lang]}</span> <span class="name" translate="no">Esensee Solutions<svg class="flourish" viewBox="0 0 200 8" preserveAspectRatio="none"><path d="M2,5 C40,1 80,8 120,4 S180,2 198,5"/></svg></span></span></span>
+        <span class="sig" aria-hidden="true"><span class="text"><span class="line">${LINE[lang]}</span> <span class="name" translate="no">Estable Studio<svg class="flourish" viewBox="0 0 200 8" preserveAspectRatio="none"><path d="M2,5 C40,1 80,8 120,4 S180,2 198,5"/></svg></span></span></span>
       </a>`;
     const mark = this.getAttribute('accent') || this.#brandColor();
     if (mark) this.style.setProperty('--esensee-mark', mark);
@@ -212,5 +212,5 @@ class EsenseeCredit extends (globalThis.HTMLElement ?? class {}) {
 }
 
 if (globalThis.customElements && !customElements.get('esensee-credit')) {
-  customElements.define('esensee-credit', EsenseeCredit);
+  customElements.define('esensee-credit', EstableCredit);
 }
