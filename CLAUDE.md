@@ -4,7 +4,7 @@ This is the website of Molina Strategic Advisory (MSA), Waleska Molina Oyola's H
 operations and sales consulting practice in Puerto Rico. MSA is a trade name (DBA) of Wala Isla
 Glow LLC. The site is for `molinastrategicadvisory.com`, in English and Spanish with a toggle.
 
-MSA is Esensee's first **Founding Partner**: Esensee runs its site and email for free, with no
+MSA is Estable's first **Founding Partner**: Estable runs its site and email for free, with no
 end date, in exchange for promotion (a case study, being listed as its referral partner, a
 LinkedIn post, referrals). It is not a Client and never pays.
 
@@ -14,7 +14,7 @@ Read `docs/brief.md` (the Design brief) before changing anything. Every change i
 
 Use these in code, commits and pull requests.
 
-- **Esensee**: the business that builds and runs this site. The owner, working with AI assistants.
+- **Estable**: the business that builds and runs this site. The owner, working with AI assistants.
 - **Founding Partner**: MSA. Never "client", "customer" or "user" for MSA itself.
 - **Customer**: a business that hires MSA, or a referral partner (CPA, attorney, insurer) sending one. The people this site is for.
 - **Design brief**: `docs/brief.md`. The business, its Customers, the site's one job, and the one detail only this business has.
@@ -39,7 +39,7 @@ Every change reaches the site the same way. The pull request is the unit of appr
 1. **Pull request.** GitHub Actions (`.github/workflows/site.yml`) checks and builds it, uploads
    it as a preview version and comments its link on the pull request:
    `https://pr-<number>-molina-strategic-advisory.<account>.workers.dev`.
-2. **Approval.** Esensee opens the preview link on a phone. For a Change request, Esensee sends
+2. **Approval.** Estable opens the preview link on a phone. For a Change request, Estable sends
    the link to Waleska and waits for a yes. The link only shows the change; approving is the
    yes, and nothing goes live from it.
 3. **Merge into `main`.** GitHub Actions deploys it: the change is live within a minute.
@@ -54,12 +54,12 @@ Where "live" is:
   address. `"preview_urls": true` stays written out, which keeps step 1's preview links working.
 - **Going back**: `npx wrangler rollback` returns to the previous version.
 
-Links sent to Waleska or anyone outside Esensee are preview links (for a yes) or
+Links sent to Waleska or anyone outside Estable are preview links (for a yes) or
 `https://molinastrategicadvisory.com` (once connected).
 
 ## Rules
 
-- **Update or Change request.** If a request is more than text, photos or links, stop and say it's a Change request that Esensee decides on first. Don't build it.
+- **Update or Change request.** If a request is more than text, photos or links, stop and say it's a Change request that Estable decides on first. Don't build it.
 - **The look belongs to this site.** Palette from the logo, Cinzel / Source Serif 4 / Inter, navy sections (see `README.md`). Don't copy another site's design.
 - **Both languages together.** Every text change is made in English and Spanish in the same pull request.
 - **What the site never says** (from the brief): no prices or package prices, and never "ADP Certified" or "ADP Partner" (it's "extensive hands-on ADP experience"). Keep the footer's no-legal-or-tax-advice disclaimer.

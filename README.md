@@ -1,7 +1,7 @@
 # Molina Strategic Advisory — Website (Phase 1)
 
 A one-page site for Molina Strategic Advisory, built to the Design brief
-(`docs/brief.md`). Esensee builds and runs it; MSA is Esensee's Founding
+(`docs/brief.md`). Estable builds and runs it; MSA is Estable's Founding
 Partner. Working rules are in `CLAUDE.md`.
 
 Built with [Astro](https://astro.build), which turns the components below into
@@ -180,7 +180,7 @@ only: `wrangler.jsonc` sets it as the Worker's custom domain and turns the
 `workers.dev` address off (`preview_urls` stays on for pull request previews).
 `www` forwards to the bare domain with a Redirect Rule in the Cloudflare
 dashboard (**Rules → Redirect Rules**, "Redirect from WWW to root"), which needs
-the proxied `www` DNS record to stay. The domain's DNS is on Esensee's
+the proxied `www` DNS record to stay. The domain's DNS is on Estable's
 Cloudflare account; email is Hostinger's (the MX and SPF records), so leave
 those records alone.
 

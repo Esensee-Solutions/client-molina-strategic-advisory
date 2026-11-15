@@ -1,4 +1,4 @@
-// The site on Cloudflare Workers (Esensee ADR 0003). There is no Worker code:
+// The site on Cloudflare Workers (Estable ADR 0003). There is no Worker code:
 // Cloudflare serves the built files in dist/ as they are, and reads
 // dist/_redirects. GitHub Actions builds and deploys (.github/workflows/site.yml).
 {
